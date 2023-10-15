@@ -1,0 +1,194 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('./Roboto/Roboto-Medium.ttf') format('truetype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+/* Estilos para el encabezado y otros elementos visuales */
+body {
+    padding: 0;
+    margin: 0;
+    font-family: "Roboto";
+}
+
+header {
+    background-color: #72F2EB;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 7vh;
+    position: relative;
+}
+
+.logo img {
+    max-width: 200px;
+    height: auto;
+    padding-left: 40px;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    margin-right: 100px;
+    position: relative;
+}
+
+.menu li {
+    margin-right: 50px;
+    position: relative;
+}
+
+.menu li a {
+    transition: 0.5s;
+}
+
+.menu li a:hover {
+    color: #FF928A;
+    font-size: 1.2em;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.login {
+    display: flex;
+    align-items: center;
+    padding-right: 50px;
+}
+
+.login i {
+    margin-right: 5px;
+}
+
+#map {
+    height: calc(100vh - 12vh);
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.pie-pagina {
+    background-color: #72F2EB;
+    color: white;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 5vh;
+    z-index: 3;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.158);
+    z-index: 2;
+}
+
+.popup-contenido {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FF5F5D;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.cerrar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Estilo básico para el menú lateral */
+.menu-lateral {
+    width: 400px; 
+    height: calc(100vh - 12vh); 
+    position: fixed;
+    top: 7vh; 
+    left: 0; 
+    background-color: #ececec; 
+    overflow: hidden auto;
+    transition: 0.5s;
+    z-index: 2; 
+    margin: 0;
+    padding: 0;
+}
+
+.menu-lateral ul{
+    padding: 0px;
+    list-style: none;
+    margin: 0;
+    
+}
+
+.menu-lateral ul li {
+    list-style: none;
+    margin-left: 0px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu-lateral ul li:hover {
+    background-color: rgb(245, 244, 244);
+}
+
+/* Estilo para la imagen redonda a la izquierda */
+.menu-icon {
+    display: inline-block;
+    width: 50px; 
+    height: 50px; 
+    border-radius: 50%; 
+    margin-right: 10px;
+}
+
+/* Estilo para el contenido (título y párrafo) */
+.menu-content {
+    display: inline-block;
+    flex: 1; 
+}
+
+/* Estilo para el botón a la derecha */
+.menu-button {
+    display: inline-block;
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: -10px;
+}
+
+.menu-button:hover {
+    background-color: #555;
+}
+
+.tusplanes{
+    text-align: center;
+    font-size: 25px;
+}
+
+/* Estilo para el contenido principal que se desplazará al abrir el menú */
+#main-content {
+    margin-left: 250px; 
+    transition: 0.5s;
+}

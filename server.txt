@@ -1,0 +1,36 @@
+DOCUMENTACIÓN - README
+
+bin/runserver.sh
+
+db/create_db.sql
+   initial_load.sql
+   test_data.sql
+   home.sql
+   
+config/config./.json
+			   $variable.php
+			   .data
+	  credenciales BD
+	  servidor correo
+	  rutas
+	  
+DISEÑO EN FIGMA
+public/index.php
+      Css
+	  json
+	  img
+	  
+storage(resources)
+
+src/todas las clases
+
+templates/¿?
+
+test/ ---> Integración/Preproducción/Producción
+	  
+	  
+------------------------------------------------------
+
+config/init.php
+public/index.php
+src/bici.php
