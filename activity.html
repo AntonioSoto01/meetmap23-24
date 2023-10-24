@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Mapa</title>
+		<meta charset="UTF-8" />
+		<meta name="author" content="Daniel García Ayala"/>
+		<meta name="description" content="Mapa"/>
+		<meta name="editor" content="Manual"/>
+        <meta name="keywords" lang="es" content=""/>
+        <link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+        <header>
+            <div class="logo">
+                <a href="#"><img src="meetmap.png" alt="Logo de la empresa"></a>
+            </div>
+            <nav>
+                <ul class="menu">
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Planes Cerca</a></li>
+                    <li><a href="#">Categorías</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="login">
+                <i class="fa fa-user"></i>
+                <a href="#" id="mostrarPopup">Iniciar sesión</a>
+
+                <div id="popup" class="popup">
+                    <div class="popup-contenido">
+                        <span class="cerrar" id="cerrarPopup">&times;</span>
+                        <h2>Iniciar sesión</h2>
+                        <form>
+                            <label>Nombre de usuario<br><input type="text" placeholder="Usuario" required></label><br><br>
+                            <label>Contraseña<br><input type="password" placeholder="Contraseña" required></label><br><br>
+                            <button type="submit">Iniciar sesión</button>
+                        </form>
+                    </div>
+                </div>
+            
+            </div>
+        </header>
+        <div class="container">
+                <div class="nombre">
+                    <h1>Nombre del plan</h1>
+                </div>
+                <img class="like" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/768px-Heart_coraz%C3%B3n.svg.png"/>
+                <div class="descripcion">
+                    <h2>Descripción</h2>
+                    <p>Lorem ipsum dolor sit amet. Et molestiae porro in amet consequatur ut illum minus eos illo consectetur aut minima fugit. Sit provident sunt sed quibusdam fugiat non optio modi. Eos dolor accusantium et ratione dolorem et explicabo laborum.
+
+                        Aut officia aperiam et omnis porro a dolorem earum qui voluptatem soluta est vitae nesciunt sit reiciendis corrupti et quisquam animi. Sed dolor velit qui aperiam ratione qui omnis tempore.
+                        
+                        Et alias magni et deserunt omnis in omnis inventore et totam tenetur. Non pariatur tenetur qui nulla minus aut modi aliquam est rerum voluptas ea exercitationem ipsam.</p>
+                </div>
+                <div class="relevante">
+                    <div class="lugar">
+                        <img src="https://cdn.icon-icons.com/icons2/1369/PNG/512/-place_90615.png"/>
+                        <p>Lugar genérico donde se realizará la actividad</p>
+                    </div>
+                    <div class="fecha">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Calendar_icon_2.svg/1978px-Calendar_icon_2.svg.png"/>
+                        <p>Lugar genérico donde se realizará la actividad</p>
+                    </div>
+                    <div class="hora">
+                        <img src="https://cdn-icons-png.flaticon.com/512/281/281668.png"/>
+                        <p>Lugar genérico donde se realizará la actividad</p>
+                    </div>
+                </div>
+                <div class="mas-info">
+                    <div class="info">
+                        <img src="./world.png"/>
+                        <p><a href="#">Mas información acerca del evento</a></p>
+                    </div>
+                </div>
+                <button class="suscribirse">Unirse</button>
+        </div>
+        <footer class="pie-pagina">
+            <p>&copy; 2023 Meetmap</p>
+        </footer>
+        <script type = "text/javascript" src="./script.js"></script>
+	</body>
+</html>

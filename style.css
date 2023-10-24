@@ -1,10 +1,10 @@
 @font-face {
-    font-family: 'Roboto'; /* Nombre que le das a la fuente */
-    src: url('./Roboto/Roboto-Medium.ttf') format('truetype'); /* Ruta de la fuente en tu servidor */
+    font-family: 'Roboto';
+    src: url('./Roboto/Roboto-Medium.ttf') format('truetype'); 
     font-weight: normal;
     font-style: normal;
 }
-
+/* Estilos para el encabezado y otros elementos visuales */
 body {
     padding: 0;
     margin: 0;
@@ -40,13 +40,13 @@ header {
     position: relative;
 }
 
-.menu li a{
+.menu li a {
     transition: 0.5s;
 }
 
 .menu li a:hover {
     color: #FF928A;
-    font-size: 1.2em; 
+    font-size: 1.2em;
 }
 
 .menu a {
@@ -79,6 +79,7 @@ header {
     bottom: 0;
     width: 100%;
     height: 5vh;
+    z-index: 3;
 }
 
 .popup {
@@ -102,9 +103,9 @@ header {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     display: flex;
-    flex-direction: column; /* Establece una disposición de columna */
-    align-items: center; /* Centra horizontalmente */
-    text-align: center; /* Alinea el texto al centro */
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .cerrar {
@@ -115,3 +116,225 @@ header {
     cursor: pointer;
 }
 
+/* Estilo básico para el menú lateral */
+.menu-lateral {
+    width: 400px; 
+    height: calc(100vh - 12vh); 
+    position: fixed;
+    top: 7vh; 
+    left: 0; 
+    background-color: #ececec; 
+    overflow: hidden auto;
+    transition: 0.5s;
+    z-index: 2; 
+    margin: 0;
+    padding: 0;
+}
+
+.menu-lateral ul{
+    padding: 0px;
+    list-style: none;
+    margin: 0;
+    
+}
+
+.menu-lateral ul li {
+    list-style: none;
+    margin-left: 0px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu-lateral ul li:hover {
+    background-color: rgb(245, 244, 244);
+}
+
+.menu-icon {
+    display: inline-block;
+    width: 50px; 
+    height: 50px; 
+    border-radius: 50%; 
+    margin-right: 10px;
+}
+
+.menu-content {
+    display: inline-block;
+    flex: 1; 
+}
+
+.menu-button {
+    display: inline-block;
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: -10px;
+}
+
+.menu-button:hover {
+    background-color: #555;
+}
+
+.tusplanes{
+    text-align: center;
+    font-size: 25px;
+}
+
+#main-content {
+    margin-left: 250px; 
+    transition: 0.5s;
+}
+
+/*ACTIVIDAD*/
+
+.container {
+    width: 100%;
+    overflow: hidden;
+    height: calc(100vh - 12vh);
+}
+
+.nombre {
+    width: 100%;
+    height: 20%;
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);
+    background-image: url("https://www.dzoom.org.es/wp-content/uploads/2017/07/seebensee-2384369-810x540.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nombre h1 {
+    font-size: 40px;
+    color: white;
+    margin: 0;
+    text-shadow: 2px 2px 5px #000000;
+}
+
+.descripcion{
+    width:90%;
+    color: #303030;
+    margin-top: 30px;
+    margin-left: 20px;
+}
+.relevante{
+    color: #303030;
+    margin-left: 100px;
+    width: 400px;
+}
+
+.relevante .lugar{
+    display: grid;
+    grid-template:"icono parrafo";
+    justify-content: center;
+    align-items: center;
+}
+
+.relevante .lugar img{
+    grid: "icono";
+    width: 30px;
+    height:30px;
+    opacity: 0.73;
+    margin-bottom:3px;
+}
+.relevante .lugar p{
+    grid: "parrafo";
+    margin-left: 10px;
+}
+
+.relevante .fecha{
+    display: grid;
+    grid-template:"icono parrafo";
+    justify-content: center;
+    align-items: center;
+}
+
+.relevante .fecha img{
+    grid: "icono";
+    width: 30px;
+    height:30px;
+    opacity: 0.73;
+    margin-bottom:3px;
+}
+.relevante .fecha p{
+    grid: "parrafo";
+    margin-left: 10px;
+}
+
+.relevante .hora{
+    display: grid;
+    grid-template:"icono parrafo";
+    justify-content: center;
+    align-items: center;
+}
+
+.relevante .hora img{
+    grid: "icono";
+    width: 30px;
+    height:30px;
+    opacity: 0.73;
+    margin-bottom:3px;
+}
+.relevante .hora p{
+    grid: "parrafo";
+    margin-left: 10px;
+}
+
+.mas-info{
+    width: 310px;
+    color: #FF5F5D;
+    margin-top: 30px;
+    margin-left: 20px;
+}
+
+.mas-info .info{
+    display: grid;
+    grid-template:"icono parrafo";
+}
+
+.mas-info .info img{
+    grid: "icono";
+    width: 30px;
+    height:30px;
+    opacity: 0.73;
+    margin-top:10px;
+    margin-left: 10px;
+}
+.mas-info .info p a{
+    grid: "parrafo";
+    margin-left: 10px;
+    text-decoration:none;
+    color: #FF5F5D;
+}
+
+.suscribirse {
+    width: 200px;
+    height: 50px;
+    position: fixed;
+    bottom: 100px;
+    right: 100px;
+    background-color: #FF5F5D;
+    color: #fff;
+    box-shadow: 5px 2px 5px #00000020;
+    font-size: 24px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.like {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    top: 260px;
+    right: 40px;
+    font-size: 24px;
+    color: #ff0000; 
+    cursor: pointer;
+}

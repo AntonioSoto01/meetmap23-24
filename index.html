@@ -8,6 +8,11 @@
 		<meta name="editor" content="Manual"/>
         <meta name="keywords" lang="es" content=""/>
         <link rel="stylesheet" type="text/css" href="style.css">
+        <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap"
+      async
+      defer
+    ></script>
 		
 	</head>
 	<body>
@@ -43,10 +48,48 @@
             </div>
         </header>
         <div id="map"></div>
+        <button id="toggleMenuButton">Mostrar Menú</button>
+    
+    <!-- Crea el menú lateral -->
+        <div id="menu" class="menu-lateral">
+            <h3 class="tusplanes">Tus Planes</h3>
+            <ul class="menu-lista">
+                <li class="menu-lista">
+                    <div class="menu-item">
+                    <img class="menu-icon" src="tree.jpg" alt="Icono 1">
+                    <div class="menu-content">
+                        <h3>Plan 1</h3>
+                        <p>Descripción del plan 1.</p>
+                    </div>
+                    <button class="menu-button">Chat</button>
+                </div>
+            </li>
+                <li>
+                    <div class="menu-item">
+                        <img class="menu-icon" src="tree.jpg" alt="Icono 1">
+                        <div class="menu-content">
+                            <h3>Plan 2</h3>
+                            <p>Descripción del Plan 2.</p>
+                        </div>
+                        <button class="menu-button">Chat</button>
+                    </div>
+                </li>
+                <li>
+                    <div class="menu-item">
+                        <img class="menu-icon" src="tree.jpg" alt="Icono 1">
+                        <div class="menu-content">
+                            <h3>Plan 3</h3>
+                            <p>Descripción del Plan 3.</p>
+                        </div>
+                        <button class="menu-button">Chat</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
         <footer class="pie-pagina">
             <p>&copy; 2023 Meetmap</p>
         </footer>
         <script type = "text/javascript" src="./script.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap"></script>
+        <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap"></script>-->
 	</body>
 </html>
