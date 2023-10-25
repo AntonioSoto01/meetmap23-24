@@ -1,52 +1,51 @@
 USE meetmap;
-CREATE TABLE Usuarios (
+
+CREATE TABLE Users (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(255),
-    apellidos VARCHAR(255),
-    nombre_usuario VARCHAR(50),
+    name VARCHAR(255),
+    last_name VARCHAR(255),
+    username VARCHAR(50),
     email VARCHAR(255),
-    numero_telefono VARCHAR(15),
-    imagen_url VARCHAR(255)
+    phone_number VARCHAR(15),
+    image_url VARCHAR(255)
 );
 
-CREATE TABLE Actividad (
+CREATE TABLE Activity (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    latitud FLOAT,
-    longitud FLOAT,
-    nombre VARCHAR(255),
-    descripcion TEXT,
-    fecha DATE,
-    hora TIME,
-    categoria VARCHAR(255),
-    nombre_lugar VARCHAR(255),
+    latitude FLOAT,
+    longitude FLOAT,
+    name VARCHAR(255),
+    description TEXT,
+    date DATE,
+    time TIME,
+    category VARCHAR(255),
+    place_name VARCHAR(255),
     link VARCHAR(255)
 );
 
-
-CREATE TABLE Mensaje (
+CREATE TABLE Message (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    usuario_id INT,
-    contenido TEXT,
-    fecha_hora DATETIME,
-    actividad_id INT,
-    FOREIGN KEY (usuario_id) REFERENCES Usuarios(id),
-    FOREIGN KEY (actividad_id) REFERENCES Actividad(id)
+    user_id INT,
+    content TEXT,
+    date_time DATETIME,
+    activity_id INT,
+    FOREIGN KEY (user_id) REFERENCES Users(id),
+    FOREIGN KEY (activity_id) REFERENCES Activity(id)
 );
 
-CREATE TABLE Suscritos(
+CREATE TABLE Subscribers(
     id INT PRIMARY KEY AUTO_INCREMENT,
-    usuario_id INT,
-    actividad_id INT,
-    FOREIGN KEY (usuario_id) REFERENCES Usuarios(id),
-    FOREIGN KEY (actividad_id) REFERENCES Actividad(id)
+    user_id INT,
+    activity_id INT,
+    FOREIGN KEY (user_id) REFERENCES Users(id),
+    FOREIGN KEY (activity_id) REFERENCES Activity(id)
 );
-
 
 CREATE TABLE Likes(
     id INT PRIMARY KEY AUTO_INCREMENT,
-    usuario_id INT,
-    actividad_id INT,
-    FOREIGN KEY (usuario_id) REFERENCES Usuarios(id),
-    FOREIGN KEY (actividad_id) REFERENCES Actividad(id)
+    user_id INT,
+    activity_id INT,
+    FOREIGN KEY (user_id) REFERENCES Users(id),
+    FOREIGN KEY (activity_id) REFERENCES Activity(id)
 );
 

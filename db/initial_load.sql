@@ -1,6 +1,6 @@
 USE meetmap;
-DROP TABLE Mensaje;
-DROP TABLE Likes;
-DROP TABLE Suscritos;
-DROP TABLE Usuarios;
-DROP TABLE Actividad;
+DROP TABLE IF EXISTS Message;
+DROP TABLE IF EXISTS Likes;
+DROP TABLE IF EXISTS Subscribers;
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Activity;
