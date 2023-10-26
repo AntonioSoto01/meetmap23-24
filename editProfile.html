@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Mapa</title>
+		<meta charset="UTF-8" />
+		<meta name="author" content="Daniel García Ayala"/>
+		<meta name="description" content="Mapa"/>
+		<meta name="editor" content="Manual"/>
+        <meta name="keywords" lang="es" content=""/>
+        <link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+        <header>
+            <div class="logo">
+                <a href="#"><img src="meetmap.png" alt="Logo de la empresa"></a>
+            </div>
+            <nav>
+                <ul class="menu">
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Planes Cerca</a></li>
+                    <li><a href="#">Categorías</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="login">
+                <i class="fa fa-user"></i>
+                <a href="#" id="mostrarPopup">Iniciar sesión</a>
+
+                <div id="popup" class="popup">
+                    <div class="popup-contenido">
+                        <span class="cerrar" id="cerrarPopup">&times;</span>
+                        <h2>Iniciar sesión</h2>
+                        <form>
+                            <label>Nombre de usuario<br><input type="text" placeholder="Usuario" required></label><br><br>
+                            <label>Contraseña<br><input type="password" placeholder="Contraseña" required></label><br><br>
+                            <button type="submit">Iniciar sesión</button>
+                        </form>
+                    </div>
+                </div>
+            
+            </div>
+        </header>
+        <div class="container-form">
+            <h1>Edición de Usuario</h1>
+            <img id="imagen" src="user.png"/>
+            <form>
+                <label for="usuario">Nombre de Usuario:</label>
+                <input type="text" id="usuario" name="usuario">
+    
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre">
+    
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido">
+    
+                <label for="telefono">Teléfono:</label>
+                <input type="text" id="telefono" name="telefono">
+    
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+    
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" name="descripcion" rows="4"></textarea>
+                    <button class="btn-actualizar" type="submit" value="Actualizar">Actualizar</button>
+                </div>
+            </form>
+        <footer class="pie-pagina">
+            <p>&copy; 2023 Meetmap</p>
+        </footer>
+        <script type = "text/javascript" src="./script.js"></script>
+	</body>
+</html>
