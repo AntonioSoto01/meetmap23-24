@@ -398,3 +398,153 @@ input, textarea {
     border-radius: 5px;
     cursor: pointer;
 }
+
+/*PLANES Y CATEGORIAS*/
+
+.container-cat{
+    width: 100%;
+    overflow: hidden;
+    height: calc(100vh - 12vh);
+    position: relative;
+}
+
+.planes-cercanos {
+    width: 100%;
+    height: 20%;
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);
+    background-image: url("./tree.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.categorias {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+    margin-top: 100px;
+    position: relative;
+    z-index: 2;
+}
+
+.categoria {
+    text-align: center;
+    position: relative;
+}
+
+.categoria img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.categoria p {
+    width: max-content;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: left;
+    transform: translate(-55%, 50%);
+    font-size: 30px;
+    text-shadow: 2px 2px #00000030;
+    color: #fff;
+    padding: 5px;
+}
+
+.formulario {
+    position: absolute;
+    background-color: #FF5F5D;
+    width: 500px;
+    height: 100px;
+    left: 50%;
+    top: 22%;
+    transform: translate(-50%, -50%);
+    text-align: left;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 60% 30%;
+    grid-template-rows: auto auto;
+    gap: 20px;
+    align-items: center;
+    justify-content: left;
+    border-radius: 10px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin-left:10px;
+}
+
+.input-group label {
+    font-size: 16px;
+    color: #fff;
+    text-align: left;
+    margin-left:10px;
+}
+
+.input-group input {
+    width: 90%;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.planes {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0px;
+}
+
+.planes {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0;
+    padding: 0; /* Elimina el espacio entre elementos */
+}
+
+.plan {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.plan-a{
+    background-color: #F5F5F5;
+}
+
+.plan-b{
+    background-color: #EBEBEB;
+}
+
+.plan img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.plan-info {
+    width: 100%;
+    margin-left: 10px;
+}
+
+.plan h2 {
+    width: 100%;
+    margin: 5px 0;
+}
+
+.plan p {
+    width: 100%;
+    margin: 5px 0;
+}
+
+
+
