@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Roboto';
-    src: url('./Roboto/Roboto-Medium.ttf') format('truetype'); 
+    src: url('./src/Roboto/Roboto-Medium.ttf') format('truetype'); 
     font-weight: normal;
     font-style: normal;
 }
@@ -90,7 +90,7 @@ header {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.158);
-    z-index: 2;
+    z-index: 4;
 }
 
 .popup-contenido {
@@ -343,7 +343,7 @@ header {
 
 .container-form {
     width: 100%;
-    background-image: url("./fondoform.png");
+    background-image: url("./src/fondoform.png");
     background-size: cover;
     padding-top: 20px;
     text-align: left;
@@ -412,7 +412,7 @@ input, textarea {
     width: 100%;
     height: 20%;
     box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);
-    background-image: url("./tree.jpg");
+    background-image: url("./src/tree.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -508,7 +508,7 @@ input, textarea {
     flex-direction: column;
     align-items: flex-start;
     margin: 0;
-    padding: 0; /* Elimina el espacio entre elementos */
+    padding: 0;
 }
 
 .plan {
