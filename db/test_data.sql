@@ -1,6 +1,11 @@
 USE meetmap;
 
-INSERT INTO Users (name, email) VALUES ('User3', 'user3@example.com');
+INSERT INTO Users (name, last_name, username, email, phone_number, image_url)
+VALUES ('John', 'Doe', 'johndoe', 'john.doe@example.com', '123456789', 'https://example.com/johndoe.jpg');
+
+INSERT INTO Users (name, last_name, username, email, phone_number, image_url)
+VALUES ('Alice', 'Johnson', 'alicejohn', 'alice.j@example.com', '987654321', 'https://example.com/alicejohn.jpg');
+
 
 
 
@@ -15,3 +20,14 @@ INSERT INTO Message (user_id, content, date_time, activity_id)
 VALUES (1, 'Hello, this is an example message for activity 2!', '2023-10-26 16:00:00', 1);
 
 INSERT INTO Subscribers (user_id, activity_id) VALUES (1, 1);
+INSERT INTO Likes (user_id, activity_id) VALUES (2, 2);
+
+INSERT INTO Message (user_id, content, date_time, activity_id)
+VALUES (1, 'Este es un mensaje de ejemplo', NOW(), 1);
+
+
+INSERT INTO Message (user_id, content, date_time, activity_id)
+VALUES (2, 'Otro mensaje para la misma actividad', NOW(), 1);
+
+INSERT INTO Message (user_id, content, date_time, activity_id)
+VALUES (3, 'Mensaje para una actividad diferente', NOW(), 2);

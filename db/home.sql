@@ -1,0 +1,8 @@
+use meetmap;
+DROP TABLE IF EXISTS Message;
+DROP TABLE IF EXISTS Likes;
+DROP TABLE IF EXISTS Subscribers;
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Activity;
+
+
