@@ -29,3 +29,8 @@ Tabla de favoritos
 
 Carga de datos
 ![Carga de datos](./Screenshots/Datos.png)
+
+###Entregar
+
+Listado de funciones
+Permitir que se ejecute
