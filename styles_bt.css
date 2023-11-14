@@ -35,3 +35,53 @@ body {
     border-color: #FF5F5D;
 }
 
+.background-image {
+    background-image: url('./public/src/tree.jpg');
+    background-size: cover;
+    background-position: center;
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);
+}
+.formulario-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 10px;
+    text-align: left;
+}
+
+.formulario-grid .form-group {
+    display: flex;
+    flex-direction: column;
+}
+.translate-middle-x {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.position-absolute-centered {
+    position: absolute;
+    top: 180px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+.bg-custom-form {
+    background-color: #FF5F5D;
+    height: auto;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.custom-width {
+    width: 300px;
+}
+.slider-categorias {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+}

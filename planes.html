@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mapa</title>
+    <title>Planes Cercanos</title>
     <meta charset="UTF-8" />
     <meta name="author" content="Daniel García Ayala"/>
     <meta name="description" content="Mapa"/>
@@ -99,7 +99,66 @@
     
 
     <!-- Contenido de tu página -->
-    <div class="flex-grow-1" id="map"></div>
+    <div class="container-fluid flex-grow-1 position-relative d-flex flex-column">
+        <div class="row">
+            <div class="col-md-12 bg-primary py-5 text-center background-image">
+                <div class="container">
+                    <h1 class="text-white">Planes Cercanos</h1>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Formulario superpuesto -->
+        <div class="position-absolute-centered top-50 start-50 translate-middle-x">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-5 bg-custom-form p-4 rounded-left">
+                        <form class="formulario-grid mx-auto">
+                            <div class="form-group">
+                                <label class="text-white" for="evento">Estoy buscando</label>
+                                <input type="text" class="form-control custom-width" id="evento" name="evento" placeholder="Evento o categoría">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-3 bg-custom-form p-4 rounded-right">
+                        <form class="formulario-grid mx-auto">
+                            <div class="form-group">
+                                <label class="text-white" for="fecha">Cuándo</label>
+                                <input type="date" class="form-control" id="fecha" name="fecha" placeholder="Cualquier fecha">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Slider de Categorías -->
+                <div class="col-md-12 bg-secondary text-white py-5 text-center slider-categorias">
+                <h2>Slider de Categorías</h2>
+                <!-- Aquí va tu código para el slider de categorías -->
+            </div>
+        </div>
+    
+        <div class="container-fluid px-0">
+            <div class="row">
+                <div class="col-12 bg-info text-white py-5 text-center">
+                    <!-- Item Plan -->
+                    <div class="bg-danger p-0"> <!-- Elimina todo el padding -->
+                        <div class="d-flex align-items-center">
+                            <img src="./public/src/tree.jpg" alt="Plan" style="width: 200px; height: 200px;">
+                            <div class="ml-3 w-100">
+                                <h4>Nombre del Plan</h4>
+                                <p>Descripción del Plan</p>
+                                <p>Lugar</p>
+                                <p>Fecha</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
 
     <footer class="bg-custom-color text-white text-center">
         <div class="container py-3">
