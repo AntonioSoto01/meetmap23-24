@@ -1,0 +1,33 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('./public/src/Roboto/Roboto-Medium.ttf') format('truetype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: "Roboto";
+}
+
+.nav-link.text-white {
+    font-size: 1em;
+    transition: font-size 0.3s ease, color 0.3s ease;
+}
+
+.nav-link.text-white:hover {
+    color: #FF928A !important;
+    font-size: 1.2em;
+}
+
+.bg-custom-color {
+    background-color: #72F2EB;
+}
+
+.bg-custom-top {
+    background-color: #34BFB9;
+}
+
+.btn-custom-color {
+    background-color: #FF5F5D;
+    border-color: #FF5F5D;
+}
