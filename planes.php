@@ -23,7 +23,7 @@ try{
 
     if($evento != NULL && $fecha!= NULL){
         $consulta = $db->prepare("
-        SELECT name, description, date, time, category, place_name 
+        SELECT name, description, date, time, place_name 
         FROM Activity 
         WHERE (name LIKE :evento OR category LIKE :evento) 
         AND date(date) = :fecha
@@ -36,7 +36,7 @@ try{
         $consulta->bindParam(':fecha', $fecha, PDO::PARAM_STR);
     }else if($evento != NULL && $fecha== NULL){
         $consulta = $db->prepare("
-        SELECT name, description, date, time, category, place_name 
+        SELECT name, description, date, time, place_name 
         FROM Activity 
         WHERE name LIKE :evento OR category LIKE :evento
         ORDER BY name 
@@ -47,7 +47,7 @@ try{
         $consulta->bindValue(':evento', "%$evento%", PDO::PARAM_STR);
     }else if($evento == NULL && $fecha!= NULL){
         $consulta = $db->prepare("
-        SELECT name, description, date, time, category, place_name 
+        SELECT name, description, date, time, place_name 
         FROM Activity 
         WHERE date = :fecha
         ORDER BY name 
@@ -57,7 +57,7 @@ try{
 
 $consulta->bindParam(':fecha', $fecha, PDO::PARAM_STR); 
     }else{
-        $consulta = $db->prepare("SELECT name, description, date, time, category, place_name FROM Activity ORDER BY name LIMIT :limite OFFSET :offset");
+        $consulta = $db->prepare("SELECT name, description, date, time, place_name FROM Activity ORDER BY name LIMIT :limite OFFSET :offset");
     }
     $consulta ->bindValue(':limite',NUM_ELEM_POR_PAG, PDO::PARAM_INT);
     $consulta ->bindValue(':offset',NUM_ELEM_POR_PAG*($page-1), PDO::PARAM_INT);
@@ -69,6 +69,11 @@ $consulta->bindParam(':fecha', $fecha, PDO::PARAM_STR);
     $count = $consulta_count->fetch();
     $count = $count[0];
     $num_pages = ceil($count/NUM_ELEM_POR_PAG);
+
+    $consultacat = $db->prepare("SELECT DISTINCT(category) FROM Activity");
+    $resultscat = $consultacat->execute();
+    
+    $categorias = $consultacat->fetchAll(PDO::FETCH_ASSOC);
 
 }catch(PDOException $e){
     echo "ERROR: ".$e->getMessage();
@@ -209,13 +214,38 @@ $consulta->bindParam(':fecha', $fecha, PDO::PARAM_STR);
             </div>
         </div>
         
+        <!-- Slider de Categorías -->
         <div class="row">
-            <!-- Slider de Categorías -->
-                <div class="col-md-12 bg-secondary text-white py-5 text-center slider-categorias">
-                <h2>Slider de Categorías</h2>
-                <!-- Aquí va tu código para el slider de categorías -->
+            <!-- Carrusel de Bootstrap -->
+            <div id="carouselExampleIndicators" class="carousel slide col-md-12 text-white py-5 text-center slider-categorias" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <?php foreach($categorias as $key => $categoria) {?>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="<?= $key ?>" <?php echo ($key == 0) ? 'class="active"' : ''; ?>></li>
+                    <?php }?>
+                </ol>
+                <div class="carousel-inner">
+                    <?php foreach($categorias as $key => $categoria) {?>
+                        <div class="carousel-item <?php echo ($key == 0) ? 'active' : ''; ?>">
+                            <!-- Contenido del slide -->
+                            <img class="d-block w-100" src="ruta_de_la_imagen.jpg" alt=".">
+                            <div class="carousel-caption d-md-block text-white text-center slider-item">
+                                <h5><?= $categoria['category'] ?></h5>
+                            </div>
+                        </div>
+                    <?php }?>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
         </div>
+
+
     
         <div class="container-fluid px-0">
     <div class="row px-0">
