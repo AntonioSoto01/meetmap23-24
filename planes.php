@@ -2,6 +2,14 @@
 
 define('NUM_ELEM_POR_PAG',5);
 
+if(isset($_GET['evento'])){
+    $evento = $_GET['evento'];
+}
+
+if(isset($_GET['fecha']) && strlen($_GET['fecha']) === 10 && preg_match('/^[\d-]{10}$/', $_GET['fecha'])){
+    $fecha = strval(date('Y-m-d', strtotime(isset($_GET['fecha']))));
+}
+
 if(isset($_GET['page'])&& is_numeric($_GET['page']))
 {
     $page = $_GET['page'];
@@ -13,8 +21,44 @@ try{
 
     $db = new PDO('mysql:host=localhost;dbname=pruebas','dani','1234');
 
-    $consulta = $db->prepare("SELECT name, description, date, time, category, place_name FROM Activity ORDER BY name LIMIT :limite OFFSET :offset");
-    
+    if($evento != NULL && $fecha!= NULL){
+        $consulta = $db->prepare("
+        SELECT name, description, date, time, category, place_name 
+        FROM Activity 
+        WHERE (name LIKE :evento OR category LIKE :evento) 
+        AND date(date) = :fecha
+        ORDER BY name 
+        LIMIT :limite 
+        OFFSET :offset
+        ");
+
+        $consulta->bindValue(':evento', "%$evento%", PDO::PARAM_STR);
+        $consulta->bindParam(':fecha', $fecha, PDO::PARAM_STR);
+    }else if($evento != NULL && $fecha== NULL){
+        $consulta = $db->prepare("
+        SELECT name, description, date, time, category, place_name 
+        FROM Activity 
+        WHERE name LIKE :evento OR category LIKE :evento
+        ORDER BY name 
+        LIMIT :limite 
+        OFFSET :offset
+        ");
+
+        $consulta->bindValue(':evento', "%$evento%", PDO::PARAM_STR);
+    }else if($evento == NULL && $fecha!= NULL){
+        $consulta = $db->prepare("
+        SELECT name, description, date, time, category, place_name 
+        FROM Activity 
+        WHERE date = :fecha
+        ORDER BY name 
+        LIMIT :limite 
+        OFFSET :offset
+        ");
+
+$consulta->bindParam(':fecha', $fecha, PDO::PARAM_STR); 
+    }else{
+        $consulta = $db->prepare("SELECT name, description, date, time, category, place_name FROM Activity ORDER BY name LIMIT :limite OFFSET :offset");
+    }
     $consulta ->bindValue(':limite',NUM_ELEM_POR_PAG, PDO::PARAM_INT);
     $consulta ->bindValue(':offset',NUM_ELEM_POR_PAG*($page-1), PDO::PARAM_INT);
     $results = $consulta->execute();
@@ -148,15 +192,13 @@ try{
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-5 bg-custom-form p-4 rounded-left">
-                        <form class="formulario-grid mx-auto">
+                        <form class="formulario-grid mx-auto" method="get">
                             <div class="form-group">
                                 <label class="text-white" for="evento">Estoy buscando</label>
-                                <input type="text" class="form-control custom-width" id="evento" name="evento" placeholder="Evento o categoría">
+                                <input type="text" class="form-control custom-width" id="evento" name="evento" placeholder="Evento o categoría" value="<?=$evento?>">
                             </div>
-                        </form>
                     </div>
                     <div class="col-md-3 bg-custom-form p-4 rounded-right">
-                        <form class="formulario-grid mx-auto">
                             <div class="form-group">
                                 <label class="text-white" for="fecha">Cuándo</label>
                                 <input type="date" class="form-control" id="fecha" name="fecha" placeholder="Cualquier fecha">
