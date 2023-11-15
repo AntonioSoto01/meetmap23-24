@@ -90,3 +90,11 @@ body {
     width: 200px;
     height: 200px;
 }
+
+.bg-plan-par{
+    background-color: #ececec;
+}
+
+.bg-plan-impar{
+    background-color: #dddddd;
+}
