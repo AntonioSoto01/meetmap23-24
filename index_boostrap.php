@@ -1,3 +1,68 @@
+<?php
+require_once('config.php');
+
+// Inicializar el array de errores
+$errores = [];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Verificar si se enviaron los campos requeridos
+    if (
+        isset($_POST['emailRegistro']) && isset($_POST['usernameRegistro']) &&
+        isset($_POST['passwordRegistro']) && isset($_POST['confirmPasswordRegistro'])
+    ) {
+        // Recuperar datos del formulario
+        $email = $_POST['emailRegistro'];
+        $username = $_POST['usernameRegistro'];
+        $password = $_POST['passwordRegistro'];
+        $confirmPassword = $_POST['confirmPasswordRegistro'];
+
+        // Validar si las contraseñas coinciden
+        if ($password !== $confirmPassword) {
+            $errores[] = "Las contraseñas no coinciden. Por favor, inténtelo de nuevo.";
+        }
+
+        try {
+            // Establecer conexión a la base de datos utilizando las constantes definidas en config.php
+            $db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            // Comprobar si el usuario ya existe
+            $query_check_user = "SELECT * FROM Users WHERE username = :username OR email = :email LIMIT 1";
+            $stmt_check_user = $db->prepare($query_check_user);
+            $stmt_check_user->bindParam(':username', $username);
+            $stmt_check_user->bindParam(':email', $email);
+            $stmt_check_user->execute();
+            $existing_user = $stmt_check_user->fetch();
+
+            if ($existing_user) {
+                $errores[] = "El usuario o correo electrónico ya está en uso.";
+            }
+
+            // Insertar usuario si no hay errores
+            if (!empty($errores)) {
+                $query_insert_user = "INSERT INTO Users (email, username, pw) VALUES (:email, :username, :pw)";
+                $stmt_insert_user = $db->prepare($query_insert_user);
+                $stmt_insert_user->bindParam(':email', $email);
+                $stmt_insert_user->bindParam(':username', $username);
+                $stmt_insert_user->bindParam(':pw', $password);
+
+                if ($stmt_insert_user->execute()) {
+                    // Redirigir a una página de éxito o realizar alguna acción adicional
+
+                    header("Location: index_boostrap.php?msg=success");
+                    exit();
+                } else {
+                    $errores[] = "Error al registrar el usuario.";
+                }
+            }
+        } catch (PDOException $e) {
+            $errores[] = "Error de conexión: " . $e->getMessage();
+        }
+    } else {
+        $errores[] = "Todos los campos son obligatorios.";
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -16,6 +81,30 @@
 </head>
 
 <body>
+<?php
+// Tu código PHP existente...
+
+if (!empty($errores)) {
+    $errorMessages = "<ul>";
+    foreach ($errores as $error) {
+        $errorMessages .= "<li>$error</li>";
+    }
+    $errorMessages .= "</ul>";
+
+    // Generar un script para mostrar la alerta de SweetAlert con los errores
+    echo "<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Utilizando SweetAlert para mostrar los errores después de que la página se cargue
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                html: '$errorMessages'
+            });
+        });
+    </script>";
+}
+?>
+
     <header class="bg-custom-color text-white">
         <div class="d-flex justify-content-between align-items-center py-3">
             <div class="logo ml-5">
@@ -77,7 +166,7 @@
                     </div>
                     <div id="registroContent" style="display: none;">
                         <!-- Contenido de registro (inicialmente oculto) -->
-                        <form action="procesar_registro.php" method="post">
+                        <form action="" method="post">
                             <div class="form-group">
                                 <label for="emailRegistro">Correo electrónico</label>
                                 <input type="email" class="form-control" id="emailRegistro" name="emailRegistro"
@@ -128,6 +217,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
