@@ -24,18 +24,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+            // Comprobamos si el usuario ya existe
+            $query_check_user = "SELECT * FROM Users WHERE username = :username OR email = :email LIMIT 1";
+            $stmt_check_user = $db->prepare($query_check_user);
+            $stmt_check_user->bindParam(':username', $username);
+            $stmt_check_user->bindParam(':email', $email);
+            $stmt_check_user->execute();
+            $existing_user = $stmt_check_user->fetch();
+
+            if ($existing_user) {
+                echo "El usuario o correo electrónico ya está en uso.";
+                exit();
+            }
+
             // Preparamos la consulta para insertar los datos en la tabla Users
-            $query = "INSERT INTO Users (email, username) VALUES (:email, :username)";
-            $stmt = $db->prepare($query);
+            $query_insert_user = "INSERT INTO Users (email, username, pw) VALUES (:email, :username, :pw)";
+            $stmt_insert_user = $db->prepare($query_insert_user);
 
             // Hasheamos la contraseña antes de almacenarla (debes elegir tu propio método de hashing)
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             // Bind de parámetros y ejecución
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':username', $username);
+            $stmt_insert_user->bindParam(':email', $email);
+            $stmt_insert_user->bindParam(':username', $username);
+            $stmt_insert_user->bindParam(':pw', $hashedPassword); // Usamos la contraseña hasheada
 
-            if ($stmt->execute()) {
+            if ($stmt_insert_user->execute()) {
                 // Redireccionamos a una página de éxito o realizamos alguna acción adicional
                 header('Location: index_boostrap.php');
                 exit();

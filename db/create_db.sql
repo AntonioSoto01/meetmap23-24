@@ -10,7 +10,7 @@ CREATE TABLE Users (
     name VARCHAR(255),
     last_name VARCHAR(255),
     username VARCHAR(50),
-    pw VARCHAR(50),
+    pw VARCHAR(250),
     email VARCHAR(255),
     phone_number VARCHAR(15),
     image_url VARCHAR(255)
