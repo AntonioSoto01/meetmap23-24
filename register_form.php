@@ -1,28 +1,15 @@
+
 <?php
 require_once('procesar_registro.php');
 
-$errores = [];
+$errores = procesarRegistro();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $postData = [
-        'emailRegistro' => $_POST['emailRegistro'],
-        'usernameRegistro' => $_POST['usernameRegistro'],
-        'passwordRegistro' => $_POST['passwordRegistro'],
-        'confirmPasswordRegistro' => $_POST['confirmPasswordRegistro']
-    ];
-
-    $errores = procesarRegistro($postData);
-
-    if (empty($errores)) {
-        header('Location: index_boostrap.php');
-        exit();
-    }
-}
+// Tu código HTML existente...
 
 if (!empty($errores)) {
     $errorMessages = "<ul>";
-    foreach ($errores as $errores) {
-        $errorMessages .= "<li>$errores</li>";
+    foreach ($errores as $error) {
+        $errorMessages .= "<li>$error</li>";
     }
     $errorMessages .= "</ul>";
 
@@ -39,7 +26,9 @@ if (!empty($errores)) {
     </script>";
 }
 ?>
+
 <form action="" method="post">
+
     <div class="form-group">
         <label for="emailRegistro">Correo electrónico</label>
         <input type="email" class="form-control" id="emailRegistro" name="emailRegistro"

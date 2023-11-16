@@ -1,40 +1,48 @@
 <?php
+require_once('config.php');
+function procesarLogin($postData) {
+    $error = [];
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['usernameLogin']) && isset($_POST['passwordLogin'])) {
-        // Recuperar datos del formulario
-        $username = $_POST['usernameLogin'];
-        $password = $_POST['passwordLogin'];
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitLogin'])) {
+        $campos = ['usernameLogin' => 'Nombre de usuario', 'passwordLogin' => 'Contraseña'];
+
+        foreach ($campos as $campo => $label) {
+            if (isset($_POST[$campo]) && $_POST[$campo] !== '') {
+                ${$campo} = $_POST[$campo];
+            } else {
+                $error = "El campo $label es obligatorio.";
+                return $error;
+            }
+        }
 
         try {
-            // Conexión a la base de datos (usando los datos de configuración)
-            require_once('config.php');
             $db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            // Consulta para verificar el usuario en la base de datos
-            $query = "SELECT * FROM Users WHERE username = :username";
+            $query = "SELECT * FROM Users WHERE username = :username AND pw = :password";
             $stmt = $db->prepare($query);
             $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':password', $password); // La contraseña aquí debería estar en texto plano
+
             $stmt->execute();
 
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($user) {
-                if (password_verify($password, $user['pw'])) {
-                    header('Location: inicio_exitoso.php');
-                    exit();
-                } else {
-                    echo "La contraseña es incorrecta.";
-                }
+                // Validación directa en la consulta SQL
+                header('Location: index_boostrap.php');
+                exit();
             } else {
-                echo "El usuario no existe.";
+                $error = "El usuario o la contraseña son incorrectos.";
+                return $error;
             }
         } catch (PDOException $e) {
-            echo "Error de conexión: " . $e->getMessage();
+            $error = "Error de conexión: " . $e->getMessage();
+            return $error;
         }
-    } else {
-        echo "Nombre de usuario y contraseña son obligatorios.";
     }
+
+    return $error;
 }
+
 ?>
