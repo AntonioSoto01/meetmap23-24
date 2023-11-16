@@ -1,13 +1,13 @@
 <header class="bg-custom-color text-white">
         <div class="d-flex justify-content-between align-items-center py-3">
             <div class="logo ml-5">
-                <a href="#"><img src="./public/src/meetmap.png" alt="Logo de la empresa" height="50" style="margin-right: 50px;"></a>
+                <a href="index.php"><img src="./images/meetmap.png" alt="Logo de la empresa" height="50" style="margin-right: 50px;"></a>
             </div>
             <nav>
                 <ul class="nav mr-5">
-                    <li class="nav-item"><a href="#" class="nav-link text-white">Inicio</a></li>
-                    <li class="nav-item"><a href="planes.html" class="nav-link text-white">Planes Cerca</a></li>
-                    <li class="nav-item"><a href="planes.html" class="nav-link text-white">Categorías</a></li>
+                    <li class="nav-item"><a href="index.php" class="nav-link text-white">Inicio</a></li>
+                    <li class="nav-item"><a href="planes.php" class="nav-link text-white">Planes Cerca</a></li>
+                    <li class="nav-item"><a href="planes.php" class="nav-link text-white">Categorías</a></li>
                     <li class="nav-item"><a href="#" class="nav-link text-white">FAQs</a></li>
                     <li class="nav-item"><a href="#" class="nav-link text-white">Contacto</a></li>
                 </ul>

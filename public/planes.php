@@ -93,7 +93,7 @@ try{
     <meta name="editor" content="Manual"/>
     <meta name="keywords" lang="es" content=""/>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./styles_bt.css">
+    <link rel="stylesheet" type="text/css" href="./styles.css">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=iniciarMap" async defer></script>
@@ -168,8 +168,6 @@ require_once("header.php");
             </div>
         </div>
 
-
-    
         <div class="container-fluid px-0">
     <div class="row px-0">
         <div class="col-12 text-dark px-0">
@@ -180,7 +178,7 @@ require_once("header.php");
                     <?php $bgClass = ($counter % 2 === 0) ? 'bg-plan-par' : 'bg-plan-impar'; ?>
                         <div class="p-0 <?=$bgClass?>">
                             <div class="d-flex align-items-center">
-                                <img class="img-plan" src="./public/src/tree.jpg" alt="Plan">
+                                <img class="img-plan" src="./images/tree.jpg" alt="Plan">
                                 <div class="ml-3" style="padding-left: 0; padding-right: 0;">
                                     <h2 class="mb-2 text-start"><a class="text-decoration-none text-dark" href="detalle.php?id=<?=$dato['id']?>"><?=$dato['name']?></a></h2>
                                     <?php
