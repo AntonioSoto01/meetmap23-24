@@ -129,3 +129,43 @@ body {
     margin-bottom: 20px;
     margin-left:10px;
 }
+
+.icono{
+    width:30px;
+    height:30px;
+    opacity:60%;
+}
+
+.world{
+    opacity: 100%;
+}
+
+.custom-color-text, .custom-color-text:hover{
+    color:#FF5F5D;
+}
+
+.like-button{
+    position: absolute;
+    right: 50px;
+    top: 160px;
+    width: 60px;
+    height:auto;
+    cursor: pointer;
+    z-index:1;
+}
+
+.unirse-button{
+    width: 150px;
+    height: auto;
+    position: absolute;
+    background-color: #FF5F5D;
+    border:none;
+    border-radius: 10px;
+    right: 50px;
+    bottom: 20px;
+    color: #fff;
+    box-shadow: 5px 2px 5px #00000010;
+    font-size: 24px;
+    padding: 10px 20px;
+    z-index:1;
+}

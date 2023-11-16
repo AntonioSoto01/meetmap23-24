@@ -52,7 +52,8 @@ require_once("header.php");
         </div>
     </div>
     
-
+    <!--boton de corazon-->
+    <img class="like-button" src="images/heart.png" alt="Corazon">
      <!-- Sección de Descripción -->
      <div class="row mt-4">
         <div class="col-md-12">
@@ -70,32 +71,35 @@ require_once("header.php");
     <!-- Sección de iconos y textos -->
     <div class="row spacer">
         <div class="col-md-12">
-        <img src="icono1.jpg" alt="Icono 1" class="img-fluid">
-        <span><?=$plan['place_name']?></span>
+            <img src="images/marker.png" alt="Icono 1" class="icono">
+            <span><?=$plan['place_name']?></span>
         </div>
     </div>
 
+
     <div class="row spacer">
         <div class="col-md-12">
-        <img src="icono2.jpg" alt="Icono 2" class="img-fluid">
+        <img src="images/calendar.png" alt="Icono 2" class="icono">
         <span><?=$plan['date']?></span>
         </div>
     </div>
 
     <div class="row spacer">
         <div class="col-md-12">
-        <img src="icono3.jpg" alt="Icono 3" class="img-fluid">
-        <span><?=$plan['time']?></span>
+        <img src="images/reloj.png" alt="Icono 3" class="icono">
+        <span><?=substr($plan['time'], 0, 5)?></span>
         </div>
     </div>
 
     <!-- Sección de icono y texto adicionales -->
     <div class="row">
         <div class="col-md-12">
-        <img src="icono4.jpg" alt="Icono 4" class="img-fluid">
-        <span>Más información acerca del evento</span>
+        <img src="images/world.png" alt="Icono 4" class="icono world">
+        <span><a class="custom-color-text text-decoration-none" href="<?php $plan['link']?>">Más información acerca del evento</a></span>
         </div>
     </div>
+
+    <button class="unirse-button">Unirse</button>
 </div>
 
 <?php
