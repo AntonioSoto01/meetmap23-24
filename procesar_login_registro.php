@@ -1,7 +1,6 @@
 <?php
-// Comprobar si se envió el formulario
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Verificar si los campos requeridos tienen datos
     if (isset($_POST['usernameLogin']) && isset($_POST['passwordLogin'])) {
         // Recuperar datos del formulario
         $username = $_POST['usernameLogin'];
@@ -21,11 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            // Verificar si se encontró un usuario con el nombre de usuario proporcionado
             if ($user) {
-                // Verificar la contraseña
                 if (password_verify($password, $user['pw'])) {
-                    // Inicio de sesión exitoso, redirigir a alguna página de éxito o realizar alguna acción adicional
                     header('Location: inicio_exitoso.php');
                     exit();
                 } else {
