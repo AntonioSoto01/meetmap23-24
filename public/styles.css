@@ -174,3 +174,41 @@ body {
     color:red;
     font-size:12px;
 }
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+}
+
+.edicion{
+    background-image: url("images/fondoform.png");
+}
+
+.act-button{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    background-color: #FF5F5D;
+    border:none;
+    border-radius: 10px;
+    right: 100px;
+    bottom: 20px;
+    color: #fff;
+    box-shadow: 5px 2px 5px #00000010;
+    font-size: 20px;
+    padding: 10px 20px;
+    z-index:1;
+}
+
+.lab-act{
+    font-size:20px;
+    color: black;
+}
+
+.img-pointer{
+    cursor: pointer;
+}
