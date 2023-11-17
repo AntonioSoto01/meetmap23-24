@@ -169,3 +169,8 @@ body {
     padding: 10px 20px;
     z-index:1;
 }
+
+.error{
+    color:red;
+    font-size:12px;
+}
