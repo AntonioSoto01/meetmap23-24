@@ -5,7 +5,7 @@ function procesarRegistro() {
     $errores = [];
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Verificar si se enviaron los campos requeridos
+        if ($_POST['formType'] === 'register') {
         $camposRequeridos = ['emailRegistro', 'usernameRegistro', 'passwordRegistro', 'confirmPasswordRegistro'];
         
         foreach ($camposRequeridos as $campo) {
@@ -69,5 +69,5 @@ function procesarRegistro() {
     
     return $errores;
 }
-
+}
 ?>

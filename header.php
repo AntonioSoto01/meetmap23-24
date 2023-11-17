@@ -39,7 +39,7 @@
                     <?php require_once('login_form.php'); ?>
                 </div>
                 <div id="registroContent" style="display: none;">
-                    <!-- <?php require_once('register_form.php'); ?> -->
+                     <?php require_once('register_form.php'); ?> 
                 </div>
             </div>
         </div>

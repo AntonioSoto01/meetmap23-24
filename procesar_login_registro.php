@@ -1,48 +1,59 @@
 <?php
 require_once('config.php');
+
 function procesarLogin($postData) {
-    $error = [];
+    $errores = [];
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submitLogin'])) {
-        $campos = ['usernameLogin' => 'Nombre de usuario', 'passwordLogin' => 'Contraseña'];
+    if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
+        if ($_POST['formType'] === 'login') {
+            echo "<script>console.log('entra');</script>";
+            $campos = ['usernameLogin' => 'Nombre de usuario', 'passwordLogin' => 'Contraseña'];
 
-        foreach ($campos as $campo => $label) {
-            if (isset($_POST[$campo]) && $_POST[$campo] !== '') {
-                ${$campo} = $_POST[$campo];
-            } else {
-                $error = "El campo $label es obligatorio.";
-                return $error;
+            foreach ($campos as $campo => $label) {
+                if (isset($_POST[$campo]) && $_POST[$campo] !== '') {
+                    ${$campo} = $_POST[$campo];
+                } else {
+                    $mensajeError = "El campo $label es obligatorio.";
+                    array_push($errores, $mensajeError);
+                    echo "<script>console.log('$mensajeError');</script>";
+                }
             }
-        }
 
-        try {
-            $db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            if (empty($errores)) {
+                try {
+                    $db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
+                    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            $query = "SELECT * FROM Users WHERE username = :username AND pw = :password";
-            $stmt = $db->prepare($query);
-            $stmt->bindParam(':username', $username);
-            $stmt->bindParam(':password', $password); // La contraseña aquí debería estar en texto plano
+                    $query = "SELECT * FROM Users WHERE username = :username AND pw = :password";
+                    $stmt = $db->prepare($query);
+                    $stmt->bindParam(':username', $username);
+                    $stmt->bindParam(':password', $password);
 
-            $stmt->execute();
+                    $stmt->execute();
 
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($user) {
-                // Validación directa en la consulta SQL
-                header('Location: index_boostrap.php');
-                exit();
-            } else {
-                $error = "El usuario o la contraseña son incorrectos.";
-                return $error;
+                    if ($user) {
+                        echo "<script>console.log('Todo bien');</script>";
+                        header('Location: index_boostrap.php');
+                        exit();
+                    } else {
+                        $mensajeError = "El usuario o la contraseña son incorrectos.";
+                        array_push($errores, $mensajeError);
+                        echo "<script>console.log('$mensajeError');</script>";
+                    }
+                } catch (PDOException $e) {
+                    $mensajeError = "Error de conexión: " . $e->getMessage();
+                    array_push($errores, $mensajeError);
+                    echo "<script>console.log('$mensajeError');</script>";
+                }
             }
-        } catch (PDOException $e) {
-            $error = "Error de conexión: " . $e->getMessage();
-            return $error;
         }
     }
 
-    return $error;
+    return $errores;
 }
 
+
 ?>
+

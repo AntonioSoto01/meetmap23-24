@@ -28,7 +28,7 @@ if (!empty($errores)) {
 ?>
 
 <form action="" method="post">
-
+<input type="hidden" name="formType" value="register">
     <div class="form-group">
         <label for="emailRegistro">Correo electrónico</label>
         <input type="email" class="form-control" id="emailRegistro" name="emailRegistro"

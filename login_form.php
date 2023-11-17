@@ -25,7 +25,7 @@ if (!empty($errores)) {
 ?>
 
 <form action="" method="post">
-    <!-- Campos para iniciar sesión -->
+<input type="hidden" name="formType" value="login">
     <div class="form-group">
         <label for="usernameLogin">Nombre de usuario</label>
         <input type="text" class="form-control" id="usernameLogin" name="usernameLogin" placeholder="Ingrese su nombre de usuario">
