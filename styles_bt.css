@@ -35,3 +35,7 @@ body {
     border-color: #FF5F5D;
 }
 
+span.error {
+    color: red;
+    font-size: 0.8em;
+}

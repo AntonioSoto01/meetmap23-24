@@ -21,8 +21,6 @@
     </div>
 </header>
 
-<!-- Modal -->
-<!-- Modal único para iniciar sesión y registro -->
 
 <div class="modal fade" id="loginRegistroModal" tabindex="-1" role="dialog"
         aria-labelledby="loginRegistroModalLabel" aria-hidden="true">
