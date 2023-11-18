@@ -212,3 +212,12 @@ body {
 .img-pointer{
     cursor: pointer;
 }
+
+.img-contacto{
+    width: 300px;
+    margin-left: 60px;
+}
+
+.section-contacto{
+    height: 50vh;
+}
