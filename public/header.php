@@ -8,7 +8,7 @@
                     <li class="nav-item"><a href="index.php" class="nav-link text-white">Inicio</a></li>
                     <li class="nav-item"><a href="planes.php" class="nav-link text-white">Planes Cerca</a></li>
                     <li class="nav-item"><a href="planes.php" class="nav-link text-white">Categorías</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link text-white">FAQs</a></li>
+                    <li class="nav-item"><a href="FAQs.php" class="nav-link text-white">FAQs</a></li>
                     <li class="nav-item"><a href="contacto.php" class="nav-link text-white">Contacto</a></li>
                 </ul>
             </nav>
