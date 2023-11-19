@@ -2,7 +2,6 @@ function mostrarRegistro() {
     document.getElementById('loginContent').style.display = 'none';
 
     document.getElementById('registroContent').style.display = 'block';
-    console.log( document.getElementById('registroContent').style.display)
     document.getElementById('loginRegistroModalLabel').innerText = 'Registrarse';
 }
 
@@ -16,7 +15,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const params = new URLSearchParams(window.location.search);
     const errorLogin = params.get('errorLogin');
     const errorRegistro = params.get('errorRegistro');
+    const successMsg = params.get('msg');
 
+    if (successMsg === 'success') {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: 'El registro se realizó correctamente.',
+            });
+    }
     if (errorLogin === 'true') {
         mostrarLogin(); // Mostrar el formulario de inicio de sesión si hay un error de inicio de sesión
         $('#loginRegistroModal').modal('show'); 
