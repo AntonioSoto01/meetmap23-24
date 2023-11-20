@@ -1,3 +1,6 @@
+<?php session_start();
+$urlCompleta = $_SERVER['REQUEST_URI'];
+$errores = $_SESSION['errores'];?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,52 +21,76 @@
 require_once("header.php");
 ?>
 <div class="container-fluid edicion">
-            <!-- Título "Edición de Usuario" centrado -->
-            <h1 class="text-center text-white mt-2">Edición de usuario</h1>
-        
-            <div class="row justify-content-center mt-4">
-                <!-- Contenedor para centrar la imagen -->
-                <div class="col-12 text-center">
-                  <form>
-                  <label for="fileUpload">
-                    <img src="./images/user.png" alt="Imagen de perfil" class="profile-image mx-auto img-pointer ">
+    <h1 class="text-center text-white mt-2">Edición de usuario</h1>
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-12 text-center">
+            <form action="update_user.php" method="post">
+                <input type="hidden" name="formType" value="updateProfile">
+
+                <label for="fileUpload">
+                    <img src="./images/user.png" alt="Imagen de perfil" class="profile-image mx-auto img-pointer">
                 </label>
                 <input class="d-none" type="file" id="fileUpload">
+
+                <div class="row mt-4 ml-5">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="lab-act" for="username">Nombre de usuario</label>
+                            <input type="text" class="form-control" id="username" name="username">
+                            <?php if(isset($errors['username'])) { ?>
+                                <span class="error"><?=$errors['username']?></span>
+                            <?php } ?>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="lab-act" for="firstName">Nombre</label>
+                            <input type="text" class="form-control" id="firstName" name="firstName">
+                            <?php if(isset($errors['firstName'])) { ?>
+                                <span class="error"><?=$errors['firstName']?></span>
+                            <?php } ?>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="lab-act" for="lastName">Apellido</label>
+                            <input type="text" class="form-control" id="lastName" name="lastName">
+                            <?php if(isset($errors['lastName'])) { ?>
+                                <span class="error"><?=$errors['lastName']?></span>
+                            <?php } ?>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="lab-act" for="phone">Teléfono</label>
+                            <input type="tel" class="form-control" id="phone" name="phone">
+                            <?php if(isset($errors['phone'])) { ?>
+                                <span class="error"><?=$errors['phone']?></span>
+                            <?php } ?>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="lab-act" for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email">
+                            <?php if(isset($errors['email'])) { ?>
+                                <span class="error"><?=$errors['email']?></span>
+                            <?php } ?>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="lab-act" for="description">Descripción</label>
+                            <textarea class="form-control" id="description" name="description" maxlength="100"></textarea>
+                            <?php if(isset($errors['description'])) { ?>
+                                <span class="error"><?=$errors['description']?></span>
+                            <?php } ?>
+                        </div>
+                    </div>
                 </div>
-              </div>
-        
-            <div class="row mt-4 ml-5">
-              <!-- Formulario -->
-              <div class="col-md-2">
-                  <div class="form-group">
-                    <label class="lab-act" for="username">Nombre de usuario</label>
-                    <input type="text" class="form-control" id="username">
-                  </div>
-                  <div class="form-group">
-                    <label class="lab-act" for="firstName">Nombre</label>
-                    <input type="text" class="form-control" id="firstName">
-                  </div>
-                  <div class="form-group">
-                    <label class="lab-act" for="lastName">Apellido</label>
-                    <input type="text" class="form-control" id="lastName">
-                  </div>
-                  <div class="form-group">
-                    <label class="lab-act" for="phone">Teléfono</label>
-                    <input type="tel" class="form-control" id="phone">
-                  </div>
-                  <div class="form-group">
-                    <label class="lab-act" for="email">Email</label>
-                    <input type="email" class="form-control" id="email">
-                  </div>
-                  <div class="form-group">
-                    <label class="lab-act" for="description">Descripción</label>
-                    <textarea class="form-control" id="description" maxlength="100"></textarea>
-                  </div>
-              </div>
-              <button type="submit" class="btn btn-primary act-button">Guardar cambios</button>
-                </form>
-            </div>
-          </div>
+
+                <button type="submit" class="btn btn-primary act-button">Guardar cambios</button>
+            </form>
+        </div>
+    </div>
+</div>
+
 <?php
 require_once("footer.php");
 ?>

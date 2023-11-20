@@ -13,6 +13,7 @@ CREATE TABLE Users (
     pw VARCHAR(250),
     email VARCHAR(255),
     phone_number VARCHAR(15),
+    descr TEXT,
     image_url VARCHAR(255)
 );
 
