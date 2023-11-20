@@ -1,6 +1,8 @@
 @font-face {
     font-family: 'Roboto';
+
     src: url('./src/Roboto/Roboto-Medium.ttf') format('truetype'); 
+
     font-weight: normal;
     font-style: normal;
 }
@@ -34,6 +36,7 @@ body {
     background-color: #FF5F5D;
     border-color: #FF5F5D;
 }
+
 
 .background-image {
     background-image: url('./images/tree.jpg');
@@ -224,4 +227,10 @@ body {
 
 .section-faqs{
     height: 15vh;
+
+}
+span.error {
+    color: red;
+    font-size: 0.8em;
+
 }

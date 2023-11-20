@@ -1,5 +1,5 @@
 <?php
-
+require_once('config.php');
 define('NUM_ELEM_POR_PAG',5);
 
 if(isset($_GET['evento'])){
@@ -19,7 +19,7 @@ if(isset($_GET['page'])&& is_numeric($_GET['page']))
 
 try{
 
-    $db = new PDO('mysql:host=localhost;dbname=pruebas','dani','1234');
+    $db =new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
 
     if($evento != NULL && $fecha!= NULL){
         $consulta = $db->prepare("

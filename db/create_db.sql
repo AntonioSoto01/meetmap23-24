@@ -1,10 +1,16 @@
 USE meetmap;
 
+DROP TABLE IF EXISTS Message;
+DROP TABLE IF EXISTS Likes;
+DROP TABLE IF EXISTS Subscribers;
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Activity;
 CREATE TABLE Users (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255),
     last_name VARCHAR(255),
     username VARCHAR(50),
+    pw VARCHAR(250),
     email VARCHAR(255),
     phone_number VARCHAR(15),
     image_url VARCHAR(255)
