@@ -1,67 +1,60 @@
 <?php
 session_start();
-require_once('config.php');
+require_once('common_functions.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $requiredFields = [
-        'username' => 'Nombre de usuario',
-        'firstName' => 'Nombre',
-        'lastName' => 'Apellido',
-        'phone' => 'Teléfono',
-        'email' => 'Correo electrónico',
-        'description' => 'Descripción'
-        // Agrega otros campos que son obligatorios aquí
+        'username' => 'Username',
+        'email' => 'Email',
     ];
 
-    $errors = [];
-
-    foreach ($requiredFields as $field => $fieldName) {
-        if (empty($_POST[$field])) {
-            $errors[$field] = "El campo $fieldName es obligatorio.";
-        }
-    }
+    $errors = validateFields($requiredFields);
 
     if (empty($errors)) {
         $username = $_POST['username'];
-        $firstName = $_POST['firstName'];
-        $lastName = $_POST['lastName'];
-        $phone = $_POST['phone'];
+        $firstName = $_POST['firstName'] ?? '';
+        $lastName = $_POST['lastName'] ?? '';
+        $phone = $_POST['phone'] ?? '';
         $email = $_POST['email'];
         $descr = $_POST['description'] ?? '';
-        
-        try {
-            $db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $profileImageData = null;
 
-            $query = "UPDATE Users SET username = :username, name = :firstName, last_name = :lastName, phone_number = :phone, email = :email, descr = :descr WHERE id = :user_id";
+        if (!empty($_FILES['profileImage']['tmp_name']) && is_uploaded_file($_FILES['profileImage']['tmp_name'])) {
+            $profileImageData = file_get_contents($_FILES['profileImage']['tmp_name']);
+        }
 
-            $stmt = $db->prepare($query);
-            $stmt->bindParam(':username', $username);
-            $stmt->bindParam(':firstName', $firstName);
-            $stmt->bindParam(':lastName', $lastName);
-            $stmt->bindParam(':phone', $phone);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':descr', $descr);
-            $user_id = $_SESSION['user_id'];
-            $stmt->bindParam(':user_id', $user_id);
+        $query = "UPDATE Users SET username = :username, name = :firstName, last_name = :lastName, phone_number = :phone, email = :email, descr = :descr, profile_image = :profileImage WHERE id = :user_id";
+        $params = [
+            ':username' => $username,
+            ':firstName' => $firstName,
+            ':lastName' => $lastName,
+            ':phone' => $phone,
+            ':email' => $email,
+            ':descr' => $descr,
+            ':user_id' => $_SESSION['user_id'],
+            ':profileImage' => $profileImageData
+        ];
 
-            $stmt->execute();
+        $checkUser = checkExistingUserEmail($username, $email);
 
-            header("Location: editProfile.php?msg=success");
-            exit();
-        } catch (PDOException $e) {
-            $errors['update'] = "Error de conexión: " . $e->getMessage();
-            $_SESSION['errors'] = $errors; // Almacena los errores en la sesión
-            session_destroy();
-            header("Location: editProfile.php");
-            exit();
+        if ($checkUser['exists']) {
+            $errors['repetido'] =  "El usuario o correo electrónico ya está en uso.";
+        } else {
+            $stmt = executeQuery($query, $params);
+
+            if ($stmt) {
+                redirect('editProfile.php', 'msg=success');
+                exit();
+            } else {
+                $_SESSION['errors'] = "Error actualizando perfil.";
+                redirect('editProfile.php', 'msg=error');
+                exit();
+            }
         }
     } else {
-        $_SESSION['errores'] = $errors; // Almacena los errores en la sesión
-        session_destroy();
-        header("Location: editProfile.php");
+        $_SESSION['errors'] = $errors;
+        redirect('editProfile.php', 'msg=failure');
         exit();
     }
 }
 ?>
-

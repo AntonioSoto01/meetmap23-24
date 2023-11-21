@@ -5,10 +5,10 @@ $urlCompleta = $_SERVER['REQUEST_URI'];
 $parseUrl = parse_url($urlCompleta, PHP_URL_PATH);
 $_SESSION['previous_page'] = $parseUrl;
 
-$errores = $_SESSION['errores'];
+$errors = $_SESSION['errors'];
 
-$usuarioAutenticado = isset($_SESSION['username']);
-unset($_SESSION['errores']);
+$usuarioAutenticado = isset($_SESSION['user_id']);
+unset($_SESSION['errors']);
 ?>
 <header class="bg-custom-color text-white">
         <div class="d-flex justify-content-between align-items-center py-3">
