@@ -234,3 +234,29 @@ span.error {
     font-size: 0.8em;
 
 }
+
+.titulo-marker{
+    background-color: #34BFB9; 
+    color: white; 
+    padding: 8px; 
+    text-align: center
+}
+
+.desc-marker{
+    background-color: white; 
+    color: black; 
+    padding: 8px;
+}
+
+.desc-marker p{
+    margin: 0; 
+    max-height: 4em; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+.fecha-marker{
+    display: flex; 
+    justify-content: space-between; 
+    margin-top: 8px;
+}
