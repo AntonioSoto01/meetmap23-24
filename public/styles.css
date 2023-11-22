@@ -260,3 +260,31 @@ span.error {
     justify-content: space-between; 
     margin-top: 8px;
 }
+
+#menuCollapse {
+    height: 100%;
+    width: 0;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    position: absolute;
+    top: 82px;
+    left: -40px;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 1000;
+    border-right: 1px solid #ccc;
+    padding: 20px;
+  }
+
+  #toggleMenu {
+    position: absolute;
+    top: 25%;
+    left: 0;
+    transform: translateY(-50%);
+    z-index: 1001;
+    transition: left 0.3s ease;
+  }
+
+  footer{
+    z-index: 1002;
+  }

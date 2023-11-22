@@ -25,6 +25,16 @@
     <?php
     require_once("header.php");
     ?>
+    <button class="btn btn-primary ms-3" type="button" id="toggleMenu">
+    Mostrar Menú
+    </button>
+
+    <!-- Menú desplegable a la izquierda -->
+    <div id="menuCollapse">
+    <!-- Contenido del menú -->
+        <iframe src="tu_pagina.html" frameborder="0" width="250" height="100%"></iframe>
+    </div>
+
     <!-- Contenido de tu página -->
     <div class="flex-grow-1" id="map"></div>
 
