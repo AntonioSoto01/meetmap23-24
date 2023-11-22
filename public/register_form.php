@@ -42,8 +42,8 @@
 
         <div class="text-center">
             <button type="submit" class="btn btn-custom-color text-white">Registrarse</button>
-            <?php if(isset($errors['repetido'])) { ?>
-                <span class="error"><?=$errors['repetido']?></span>
+            <?php if(isset($errors['errors'])) { ?>
+                <span class="error"><?=$errors['errors']?></span>
             <?php } ?>
         </div>
 

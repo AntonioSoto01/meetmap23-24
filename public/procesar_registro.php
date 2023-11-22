@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['formType'] === 'register') {
         $checkUser = checkExistingUserEmail($username, $email);
 
         if ($checkUser['exists']) {
-            $errors['repetido'] =  "El usuario o correo electrónico ya está en uso.";
+            $errors['errors'] =  "El usuario o correo electrónico ya está en uso.";
         } else {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
@@ -39,12 +39,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['formType'] === 'register') {
                 header("Location: $previousPage?msg=success");
                 exit();
             } else {
-                $errors['repetido'] = "Error al registrar el usuario.";;
+                $errors['errors'] = "Error al registrar el usuario.";;
             }
         }
     }
 
     $_SESSION['errors'] = $errors;
-    redirect('errorRegistro', 'true');
+    redirect(previous_page(),'errorRegistro', 'true');
 }
 ?>

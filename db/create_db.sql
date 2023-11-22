@@ -14,7 +14,7 @@ CREATE TABLE Users (
     email VARCHAR(255),
     phone_number VARCHAR(15),
     descr TEXT,
-    profile_image BLOB
+    profile_image TEXT
 );
 
 CREATE TABLE Activity (

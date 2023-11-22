@@ -1,8 +1,6 @@
 <?php
 session_start();
-if(session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+require_once("config.php");
 
 function connectDB() {
     try {
@@ -15,12 +13,12 @@ function connectDB() {
     }
 }
 
-function redirect($page, $msg) {
+function redirect($page,$param,$value) {
     $previousPage = $_SESSION['previous_page'] ?? 'index.php';
-    header("Location: $previousPage?$page=$msg");
+    header("Location: $previousPage?$param=$value");
     exit();
 }
-
+function previous_page(){     return  $_SESSION['previous_page'] ?? 'index.php';}
 function validateFields($campos) {
     $errors = [];
 

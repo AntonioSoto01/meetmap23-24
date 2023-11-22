@@ -9,6 +9,7 @@ $errors = $_SESSION['errors'];
 
 $usuarioAutenticado = isset($_SESSION['user_id']);
 unset($_SESSION['errors']);
+
 ?>
 <header class="bg-custom-color text-white">
         <div class="d-flex justify-content-between align-items-center py-3">

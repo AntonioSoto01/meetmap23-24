@@ -31,6 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['formType'] === 'login') {
     }
 
     $_SESSION['errors'] = $errors;
-    redirect('errorLogin', 'true');
+    redirect(previous_page(),'errorLogin', 'true');
 }
 ?>
