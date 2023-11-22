@@ -1,4 +1,5 @@
 <?php
+require_once("config.php");
 if(isset($_GET['id']) && is_numeric($_GET['id'])){
     $id = $_GET['id'];
 }else{
@@ -8,7 +9,7 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
 }
 
 try {
-    $db = new PDO('mysql:host=localhost;dbname=pruebas','dani','1234');
+    $db =new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $consulta = $db->prepare("SELECT * FROM Activity WHERE id = :id");
@@ -93,11 +94,11 @@ require_once("header.php");
 
     <!-- Sección de icono y texto adicionales -->
     <div class="row">
-        <div class="col-md-12">
+    <div class="col-md-12">
         <img src="images/world.png" alt="Icono 4" class="icono world">
-        <span><a class="custom-color-text text-decoration-none" href="<?php $plan['link']?>">Más información acerca del evento</a></span>
-        </div>
+        <span><a class="custom-color-text text-decoration-none" href="<?=$plan['link']; ?>">Más información acerca del evento</a></span>
     </div>
+</div>
 
     <button class="unirse-button">Unirse</button>
 </div>
