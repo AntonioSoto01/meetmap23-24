@@ -310,7 +310,8 @@ span.error {
   }
 
   .img-iframe {
-    width: 75px;
-    height: 75px;
+    padding: 5px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
   }
