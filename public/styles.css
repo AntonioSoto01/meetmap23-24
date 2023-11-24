@@ -293,7 +293,19 @@ span.error {
     z-index: 1002;
   }
 
+  header{
+    z-index: 1002;
+  }
+
   .iframe{
     width:100%; 
     height:100%;
+  }
+
+  .title {
+    background-color: #34bfb9;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-bottom: 20px;
   }

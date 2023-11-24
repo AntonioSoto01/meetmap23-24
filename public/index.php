@@ -17,7 +17,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@v0.79.0/dist/L.Control.Locate.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.Default.css" />
 
 </head>
 
@@ -29,7 +29,7 @@
     <!-- Menú desplegable a la izquierda -->
     <div id="menuCollapse">
     <!-- Contenido del menú -->
-        <iframe src="tu_pagina.html" class="iframe"frameborder="0"></iframe>
+        <iframe src="tus_planes.php" class="iframe"frameborder="0"></iframe>
     </div>
 
     <!-- Contenido de tu página -->

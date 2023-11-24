@@ -21,7 +21,7 @@ try{
 
     $db =new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
 
-    if($evento != NULL && $fecha!= NULL){
+    if ($evento != NULL && $fecha != NULL) {
         $consulta = $db->prepare("
         SELECT id, name, description, date, time, place_name 
         FROM Activity 
@@ -34,7 +34,7 @@ try{
 
         $consulta->bindValue(':evento', "%$evento%", PDO::PARAM_STR);
         $consulta->bindParam(':fecha', $fecha, PDO::PARAM_STR);
-    }else if($evento != NULL && $fecha== NULL){
+    } else if ($evento != NULL && $fecha == NULL) {
         $consulta = $db->prepare("
         SELECT id, name, description, date, time, place_name 
         FROM Activity 
@@ -45,7 +45,7 @@ try{
         ");
 
         $consulta->bindValue(':evento', "%$evento%", PDO::PARAM_STR);
-    }else if($evento == NULL && $fecha!= NULL){
+    } else if ($evento == NULL && $fecha != NULL) {
         $consulta = $db->prepare("
         SELECT id, name, description, date, time, place_name 
         FROM Activity 
@@ -55,21 +55,65 @@ try{
         OFFSET :offset
         ");
 
-        $consulta->bindParam(':fecha', $fecha, PDO::PARAM_STR); 
-    }else{
-        $consulta = $db->prepare("SELECT id, name, description, date, time, place_name FROM Activity ORDER BY name LIMIT :limite OFFSET :offset");
-        
+        $consulta->bindParam(':fecha', $fecha, PDO::PARAM_STR);
+    } else {
+        // Cuando no se proporcionan datos en el formulario, se muestra la paginación normal
+        $consulta = $db->prepare("
+        SELECT id, name, description, date, time, place_name 
+        FROM Activity 
+        ORDER BY name 
+        LIMIT :limite 
+        OFFSET :offset
+        ");
     }
-    $consulta ->bindValue(':limite',NUM_ELEM_POR_PAG, PDO::PARAM_INT);
-    $consulta ->bindValue(':offset',NUM_ELEM_POR_PAG*($page-1), PDO::PARAM_INT);
-    $results = $consulta->execute();
-    
-    $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
 
-    $consulta_count = $db->query("SELECT Count(name) AS N FROM Activity");
-    $count = $consulta_count->fetch();
-    $count = $count[0];
-    $num_pages = ceil($count/NUM_ELEM_POR_PAG);
+    $consulta->bindValue(':limite', NUM_ELEM_POR_PAG, PDO::PARAM_INT);
+    $consulta->bindValue(':offset', NUM_ELEM_POR_PAG * ($page - 1), PDO::PARAM_INT);
+
+    $consulta->execute();
+    $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+    
+    $count_query = "SELECT COUNT(*) AS N FROM Activity ";
+
+    // Inicializar un array para almacenar los valores a vincular en la consulta
+    $bind_values = [];
+
+    // Construir la parte WHERE de la consulta según los parámetros del formulario
+    $where_clause = '';
+    if ($evento != NULL && $fecha != NULL) {
+        $where_clause = "WHERE (name LIKE :evento OR category LIKE :evento) AND date(date) = :fecha";
+        $bind_values[':evento'] = "%$evento%";
+        $bind_values[':fecha'] = $fecha;
+    } else if ($evento != NULL && $fecha == NULL) {
+        $where_clause = "WHERE name LIKE :evento OR category LIKE :evento";
+        $bind_values[':evento'] = "%$evento%";
+    } else if ($evento == NULL && $fecha != NULL) {
+        $where_clause = "WHERE date = :fecha";
+        $bind_values[':fecha'] = $fecha;
+    }
+
+    // Completar la consulta con la cláusula WHERE, si es necesario
+    if (!empty($where_clause)) {
+        $count_query .= $where_clause;
+    }
+
+    // Preparar la consulta
+    $consulta_count = $db->prepare($count_query);
+
+    // Vincular los valores si es necesario
+    foreach ($bind_values as $key => $value) {
+        $consulta_count->bindValue($key, $value, PDO::PARAM_STR);
+    }
+
+    // Ejecutar la consulta
+    $consulta_count->execute();
+
+    // Obtener el total de registros
+    $count_result = $consulta_count->fetch();
+    $count = $count_result['N'];
+
+    // Calcular el número de páginas
+    $num_pages = ceil($count / NUM_ELEM_POR_PAG);
 
     $consultacat = $db->prepare("SELECT DISTINCT(category) FROM Activity");
     $resultscat = $consultacat->execute();
