@@ -25,14 +25,11 @@
     <?php
     require_once("header.php");
     ?>
-    <button class="btn btn-primary ms-3" type="button" id="toggleMenu">
-    Mostrar Menú
-    </button>
-
+    <img src="images/flecha.png" alt="Mostrar Menú" id="toggleMenu" style="cursor: pointer;" />
     <!-- Menú desplegable a la izquierda -->
     <div id="menuCollapse">
     <!-- Contenido del menú -->
-        <iframe src="tu_pagina.html" frameborder="0" width="250" height="100%"></iframe>
+        <iframe src="tu_pagina.html" class="iframe"frameborder="0"></iframe>
     </div>
 
     <!-- Contenido de tu página -->

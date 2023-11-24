@@ -36,15 +36,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 $(document).ready(function() {
     $('#toggleMenu').click(function() {
-      $('#menuCollapse').toggleClass('collapsed');
-      if ($('#menuCollapse').hasClass('collapsed')) {
-        $('#menuCollapse').css('width', '15%');
-        $('#menuCollapse').css('left', '0');
-        $('#toggleMenu').css('left', '15%'); // Movemos el botón al mismo ancho que el menú
-      } else {
-        $('#menuCollapse').css('width', '0');
-        $('#menuCollapse').css('left', '-40px');
-        $('#toggleMenu').css('left', '0'); // Devolvemos el botón a su posición original
-      }
+        $('#menuCollapse').toggleClass('collapsed');
+        if ($('#menuCollapse').hasClass('collapsed')) {
+            $('#menuCollapse').css('width', '15%');
+            $('#menuCollapse').css('left', '0');
+            $('#toggleMenu').css('left', '15%');
+            $('#toggleMenu').attr('src', 'images/flecha-inversa.png'); // Cambiar la imagen al abrir el menú
+        } else {
+            $('#menuCollapse').css('width', '0');
+            $('#menuCollapse').css('left', '-40px');
+            $('#toggleMenu').css('left', '0');
+            $('#toggleMenu').attr('src', 'images/flecha.png'); // Cambiar la imagen al cerrar el menú
+        }
     });
-  });
+});
+
