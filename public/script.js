@@ -51,4 +51,7 @@ function previewImage(event) {
         preview.src = null;
     }
 }
+document.querySelector('.like-label').addEventListener('click', function() {
+    document.getElementById('likeSubmit').click();
+});
 
