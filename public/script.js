@@ -51,3 +51,12 @@ $(document).ready(function() {
     });
 });
 
+function openInParentWindow(event) {
+    event.preventDefault();
+    
+    if (window.self !== window.top) {
+      window.top.location.href = event.target.href;
+    } else {
+      window.open(event.target.href, '_blank');
+    }
+  }

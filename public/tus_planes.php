@@ -56,7 +56,7 @@ try{
                   <img class="img-iframe" src="./images/tree.jpg" alt="Plan">
 
                   <div class="ml-2 w-100" style="font-size: 0.8em;">
-                      <h6 class="mb-1 text-start"><a class="text-decoration-none text-dark" href="detalle.php?id=<?=$dato['id']?>"><?=$dato['name']?></a></h6>
+                      <h6 class="mb-1 text-start"><a class="text-decoration-none text-dark" href="detalle.php?id=<?=$dato['id']?>" onclick="openInParentWindow(event)"><?=$dato['name']?></a></h6>
 
                       <p class="mb-0 text-start text-muted small"><?=$dato['place_name']?></p>
                       <div class="d-flex justify-content-between">
@@ -76,7 +76,7 @@ try{
       </div>
     </div>
 
-
+  <script src="/script.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
