@@ -307,5 +307,10 @@ span.error {
     color: white;
     text-align: center;
     padding: 20px 0;
-    margin-bottom: 20px;
+  }
+
+  .img-iframe {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
   }
