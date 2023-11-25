@@ -12,26 +12,33 @@ unset($_SESSION['errors']);
 
 ?>
 <header class="bg-custom-color text-white">
-        <div class="d-flex justify-content-between align-items-center py-3">
-            <div class="logo ml-5">
-                <a href="index.php"><img src="./images/meetmap.png" alt="Logo de la empresa" height="50" style="margin-right: 50px;"></a>
-            </div>
-            <nav>
-                <ul class="nav mr-5">
-                    <li class="nav-item"><a href="index.php" class="nav-link text-white">Inicio</a></li>
-                    <li class="nav-item"><a href="planes.php" class="nav-link text-white">Planes Cerca</a></li>
-                    <li class="nav-item"><a href="planes.php" class="nav-link text-white">Categorías</a></li>
-                    <li class="nav-item"><a href="FAQs.php" class="nav-link text-white">FAQs</a></li>
-                    <li class="nav-item"><a href="contacto.php" class="nav-link text-white">Contacto</a></li>
-                </ul>
-            </nav>
+    <div class="d-flex justify-content-between align-items-center py-3">
+        <div class="logo ml-5">
+            <a href="index.php"><img src="./images/meetmap.png" alt="Logo de la empresa" height="50" style="margin-right: 50px;"></a>
+        </div>
+        <nav>
+            <ul class="nav mr-5">
+                <li class="nav-item"><a href="index.php" class="nav-link text-white">Inicio</a></li>
+                <li class="nav-item"><a href="planes.php" class="nav-link text-white">Planes Cerca</a></li>
+                <li class="nav-item"><a href="planes.php" class="nav-link text-white">Categorías</a></li>
+                <li class="nav-item"><a href="FAQs.php" class="nav-link text-white">FAQs</a></li>
+                <li class="nav-item"><a href="contacto.php" class="nav-link text-white">Contacto</a></li>
+            </ul>
+        </nav>
         <div class="login mr-5">
             <i class="fa fa-user"></i>
             <?php if ($usuarioAutenticado): ?>
-                <a href="editProfile.php" class="text-white">Perfil</a>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Perfil
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="editProfile.php">Editar Perfil</a>
+                        <a class="dropdown-item" href="logout.php">Cerrar Sesión</a>
+                    </div>
+                </div>
             <?php else: ?>
-                <a href="#" id="mostrarPopup" class="text-white" data-toggle="modal"
-                    data-target="#loginRegistroModal">Iniciar sesión</a>
+                <a href="#" id="mostrarPopup" class="text-white" data-toggle="modal" data-target="#loginRegistroModal">Iniciar sesión</a>
             <?php endif; ?>
         </div>
     </div>

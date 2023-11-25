@@ -89,11 +89,11 @@ if ($db) {
         <!--boton de corazon-->
         <form id="likeForm" method="post" action="like.php">
     <input type="hidden" name="activity_id" value="<?= $id ?>">
-    <label for="likeSubmit" class="like-label">
+    <label for="likeSubmit" ></label>
         <?php if ($isLiked) : ?>
-            <img src="images/heart.png" alt="Corazón lleno">
+            <img src="images/heart.png" alt="Corazón lleno" class="like-button">
         <?php else : ?>
-            <img src="images/heart-no-filled.png" alt="Corazón vacío">
+            <img src="images/heart-no-fill.png" alt="Corazón vacío" class="like-button">
         <?php endif; ?>
     </label>
     <input id="likeSubmit" type="submit" style="display: none;">

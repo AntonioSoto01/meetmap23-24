@@ -54,7 +54,7 @@ require_once("load_user.php");
                                 <input type="text" class="form-control" id="username" name="username"
                                     value="<?= htmlspecialchars($userData['username'] ?? '') ?>">
                                 <?php if (isset($errors['username'])) { ?>
-                                    <span class="error">
+                                    <span class="error-white">
                                         <?= $errors['username'] ?>
                                     </span>
                                 <?php } ?>
