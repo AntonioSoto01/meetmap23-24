@@ -177,7 +177,10 @@ body {
     color:red;
     font-size:12px;
 }
-
+.error-white{
+    color:white;
+    font-size:12px;
+}
 .profile-image {
     width: 150px;
     height: 150px;

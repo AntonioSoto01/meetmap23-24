@@ -13,7 +13,8 @@ CREATE TABLE Users (
     pw VARCHAR(250),
     email VARCHAR(255),
     phone_number VARCHAR(15),
-    image_url VARCHAR(255)
+    descr TEXT,
+    profile_image TEXT
 );
 
 CREATE TABLE Activity (

@@ -32,7 +32,10 @@ document.addEventListener('DOMContentLoaded', function() {
         $('#loginRegistroModal').modal('show'); 
 
     }
+
+
 });
+
 
 $(document).ready(function() {
     $('#toggleMenu').click(function() {
@@ -60,3 +63,25 @@ function openInParentWindow(event) {
       window.open(event.target.href, '_blank');
     }
   }
+
+function previewImage(event) {
+    var input = event.target;
+    var preview = document.getElementById('imagePreview');
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        preview.src = null;
+    }
+}
+document.querySelector('.like-button').addEventListener('click', function() {
+    document.getElementById('likeSubmit').click();
+});
+
+
