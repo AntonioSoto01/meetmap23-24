@@ -24,7 +24,7 @@ var markerIcon = L.icon({
 var markers = L.markerClusterGroup();
 
 // Obtener datos y crear marcadores
-fetch('/api/evento.php')
+fetch('api/evento.php')
     .then(response => response.json())
     .then(data => {
         data.forEach(activity => {

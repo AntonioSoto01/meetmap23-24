@@ -1,31 +1,23 @@
 <?php
-require_once('config.php');
-try{
+require_once('common_functions.php');
 
-  $db =new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
-  $user_id = 1; // ID del usuario específico
-
-  $consulta = $db->prepare("
-      SELECT DISTINCT a.id, a.name, a.description, a.date, a.time, a.place_name
-      FROM Activity a
-      LEFT JOIN Likes l ON a.id = l.activity_id
-      LEFT JOIN Subscribers s ON a.id = s.activity_id
-      WHERE (l.user_id = :user_id OR s.user_id = :user_id)
-  ");
-
-  $consulta->bindParam(':user_id', $user_id);
-  $consulta->execute();
-
-  $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+try {
 
 
+    $query = "
+        SELECT DISTINCT a.id, a.name, a.description, a.date, a.time, a.place_name
+        FROM Activity a
+        LEFT JOIN Likes l ON a.id = l.activity_id
+        LEFT JOIN Subscribers s ON a.id = s.activity_id
+        WHERE (l.user_id = :user_id OR s.user_id = :user_id)
+    ";
 
-}catch(PDOException $e){
-  echo "ERROR: ".$e->getMessage();
-  die();
+    $params = [':user_id' =>  $_SESSION['user_id']];
+    $datos = executeQuery($query, $params)->fetchAll(PDO::FETCH_ASSOC);
+} catch(PDOException $e) {
+    echo "ERROR: ".$e->getMessage();
+    die();
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -75,8 +67,8 @@ try{
 
       </div>
     </div>
-
-  <script src="/script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="script.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
