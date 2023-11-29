@@ -18,14 +18,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['formType'] === 'register') {
         $confirmPassword = $_POST['confirmPasswordRegistro'];
 
         if ($password !== $confirmPassword) {
-            $errors['confirmPasswordRegistro'] =  "Las contraseñas no coinciden. Por favor, inténtelo de nuevo.";;
+            $errors['confirmPasswordRegistro'] =  "Las contraseñas no coinciden. Por favor, inténtelo de nuevo.";
         }
-
+        if (strlen($password) < 8) {
+            $errors['passwordRegistro'] = 'La contraseña debe tener al menos 8 caracteres.';
+        }
+    
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors['emailRegistro'] = 'El correo electrónico no tiene un formato válido.';
+        }
         $checkUser = checkExistingUserEmail($username, $email);
 
         if ($checkUser['exists']) {
             $errors['errors'] =  "El usuario o correo electrónico ya está en uso.";
-        } else {
+        } else     if (empty($errors)) {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             $query_insert_user = "INSERT INTO Users (email, username, pw) VALUES (:email, :username, :pw)";
@@ -33,13 +39,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['formType'] === 'register') {
             $stmt_insert_user = executeQuery($query_insert_user, $params_insert_user);
 
             if ($stmt_insert_user) {
-                $_SESSION['username'] = $user['username'];
-                $_SESSION['user_id'] = $user['id'];
+                $result = executeQuery('SELECT LAST_INSERT_ID() as id');
+                if ($result) {
+
+                $user_id = $result->fetch(PDO::FETCH_ASSOC)['id'];
+                $_SESSION['user_id'] =  $user_id ;
                 $previousPage = $_SESSION['previous_page'] ?? 'index.php';
                 header("Location: $previousPage?msg=success");
-                exit();
+                exit();}
             } else {
-                $errors['errors'] = "Error al registrar el usuario.";;
+                $errors['errors'] = "Error al registrar el usuario.";
             }
         }
     }
@@ -47,4 +56,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['formType'] === 'register') {
     $_SESSION['errors'] = $errors;
     redirect(previous_page(),'errorRegistro', 'true');
 }
+
 ?>

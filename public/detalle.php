@@ -59,15 +59,7 @@ if ($db) {
     <meta name="description" content="Mapa" />
     <meta name="editor" content="Manual" />
     <meta name="keywords" lang="es" content="" />
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-        crossorigin="anonymous"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=iniciarMap" async defer></script>
+    <?php include_once("links.php"); ?>
 </head>
 
 <body>
@@ -88,16 +80,16 @@ if ($db) {
 
         <!--boton de corazon-->
         <form id="likeForm" method="post" action="like.php">
-    <input type="hidden" name="activity_id" value="<?= $id ?>">
-    <label for="likeSubmit" ></label>
-        <?php if ($isLiked) : ?>
-            <img src="images/heart.png" alt="Corazón lleno" class="like-button">
-        <?php else : ?>
-            <img src="images/heart-no-fill.png" alt="Corazón vacío" class="like-button">
-        <?php endif; ?>
-    </label>
-    <input id="likeSubmit" type="submit" style="display: none;">
-</form>
+            <input type="hidden" name="activity_id" value="<?= $id ?>">
+            <button type="submit" id="likeSubmit" class="btn btn-link">
+                <?php if ($isLiked): ?>
+                    <img src="images/heart.png" alt="Corazón lleno" class="like-button">
+                <?php else: ?>
+                    <img src="images/heart-no-fill.png" alt="Corazón vacío" class="like-button">
+                <?php endif; ?>
+            </button>
+        </form>
+
 
         <!-- Sección de Descripción -->
         <div class="row mt-4">
@@ -165,11 +157,7 @@ if ($db) {
     require_once("footer.php");
     ?>
 
-    <!-- Scripts -->
-    <script src="./script.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>

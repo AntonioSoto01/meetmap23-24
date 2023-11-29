@@ -31,7 +31,7 @@ function validateFields($campos) {
     return $errors;
 }
 function executeQuery($query, $params = []) {
-    $db = connectDB();
+    $db = connectDB(); // Obtener la conexión a la base de datos
 
     if ($db) {
         try {
@@ -40,7 +40,7 @@ function executeQuery($query, $params = []) {
                 $stmt->bindParam($key, $value);
             }
             $stmt->execute();
-            return $stmt;
+            return $stmt; // Devolver el objeto PDOStatement
         } catch (PDOException $e) {
             $_SESSION['errors']['conexion'] = "Error de conexión: " . $e->getMessage();
             return false;

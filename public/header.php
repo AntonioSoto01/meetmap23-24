@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 $urlCompleta = $_SERVER['REQUEST_URI'];
@@ -14,7 +13,8 @@ unset($_SESSION['errors']);
 <header class="bg-custom-color text-white">
     <div class="d-flex justify-content-between align-items-center py-3">
         <div class="logo ml-5">
-            <a href="index.php"><img src="./images/meetmap.png" alt="Logo de la empresa" height="50" style="margin-right: 50px;"></a>
+            <a href="index.php"><img src="./images/meetmap.png" alt="Logo de la empresa" height="50"
+                    style="margin-right: 50px;"></a>
         </div>
         <nav>
             <ul class="nav mr-5">
@@ -29,16 +29,18 @@ unset($_SESSION['errors']);
             <i class="fa fa-user"></i>
             <?php if ($usuarioAutenticado): ?>
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle text-white" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-secondary dropdown-toggle text-white" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Perfil
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="editProfile.php">Editar Perfil</a>
-                        <a class="dropdown-item" href="logout.php">Cerrar Sesión</a>
+                        <a class="dropdown-item"  href="logout.php">Cerrar Sesión</a>
                     </div>
                 </div>
             <?php else: ?>
-                <a href="#" id="mostrarPopup" class="text-white" data-toggle="modal" data-target="#loginRegistroModal">Iniciar sesión</a>
+                <a href="#" id="mostrarPopup" class="text-white" data-toggle="modal"
+                    data-target="#loginRegistroModal">Iniciar sesión</a>
             <?php endif; ?>
         </div>
     </div>

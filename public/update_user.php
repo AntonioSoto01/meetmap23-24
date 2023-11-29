@@ -16,8 +16,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $phone = $_POST['phone'] ?? '';
         $email = $_POST['email'];
         $descr = $_POST['description'] ?? '';
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['errors']['email'] = 'El correo electrónico no tiene un formato válido.';
+            redirect('editProfile.php', 'msg', 'error');
+            exit();
+        }
 
-        // Opción para manejar la imagen de perfil
+        if (strlen($username) < 4) {
+            $_SESSION['errors']['username'] = 'El nombre de usuario debe tener al menos 4 caracteres.';
+            redirect('editProfile.php', 'msg', 'error');
+            exit();
+        }
         $profileImageData = null;
         if (!empty($_FILES['profileImage']['tmp_name']) && is_uploaded_file($_FILES['profileImage']['tmp_name'])) {
             $uploadDirectory = 'uploads/images';
