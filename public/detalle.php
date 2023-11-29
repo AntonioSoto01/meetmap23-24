@@ -34,7 +34,7 @@ if ($db) {
         }
 
         $isSubscribedText = $isSubscribed ? 'Está suscrito' : 'No está suscrito';
-        $buttonText = $isSubscribed ? 'Desuscribirse' : 'Suscribirse';
+        $buttonText = $isSubscribed ? 'Cancelar' : 'Unirse';
 
         $isLikedText = $isLiked ? 'Le gusta' : 'No le gusta';
         $likeButtonText = $isLiked ? 'Quitar Like' : 'Dar Like';
@@ -68,15 +68,26 @@ if ($db) {
     ?>
     <!--Contenido-->
     <div class="container-fluid flex-grow-1 position-relative d-flex flex-column">
-        <div class="row">
-            <div class="col-md-12 bg-primary py-5 text-center background-image">
-                <div class="container">
-                    <h1 class="text-white">
-                        <?= $plan['name'] ?>
-                    </h1>
-                </div>
+    <div class="row">
+    <?php
+        // Definir la URL de la imagen
+        $imagen_fondo = './images/' . $plan['categoria'] . '.jpg';
+        $imagen_mostrar = obtenerImagen($imagen_fondo);
+    ?>
+        <div class="col-md-12 bg-primary py-5 text-center background-image" style="background-image: url('<?= $imagen_mostrar ?>')">
+            <div class="container">
+                <h1 class="text-white">
+                    <?= $plan['name'] ?>
+                </h1>
             </div>
         </div>
+
+    <?php
+    function obtenerImagen($ruta_imagen) {
+        return file_exists($ruta_imagen) ? $ruta_imagen : './images/otros.jpg';
+    }
+    ?>
+</div>
 
         <!--boton de corazon-->
         <form id="likeForm" method="post" action="like.php">

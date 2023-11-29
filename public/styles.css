@@ -39,7 +39,6 @@ body {
 
 
 .background-image {
-    background-image: url('./images/tree.jpg');
     background-size: cover;
     background-position: center;
     box-shadow: inset 0 0 0 1000px rgba(0,0,0,.5);
@@ -92,7 +91,10 @@ body {
 .img-plan{
     width: 200px;
     height: 200px;
+    overflow: hidden;
+    object-fit: cover;
 }
+
 
 .bg-plan-par{
     background-color: #ececec;
@@ -318,3 +320,5 @@ span.error {
     height: 70px;
     border-radius: 50%;
   }
+
+  

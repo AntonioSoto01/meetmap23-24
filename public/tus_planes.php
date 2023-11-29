@@ -44,7 +44,12 @@ try {
           <div class="p-0 <?=$bgClass?> w-100">
               <div class="d-flex align-items-center">
                   <!-- Reducir tamaño de la imagen -->
-                  <img class="img-iframe" src="./images/tree.jpg" alt="Plan">
+                  <?php
+                                $ruta_imagen = './images/' . $dato['categoria'] . '.jpg';
+                                $imagen_mostrar = (file_exists($ruta_imagen)) ? $ruta_imagen : './images/otros.jpg';
+                                ?>
+                                <img class="img-iframe" src="<?= $imagen_mostrar ?>" alt="Plan">
+
 
                   <div class="ml-2 w-100" style="font-size: 0.8em;">
                       <h6 class="mb-1 text-start"><a class="text-decoration-none text-dark" href="detalle.php?id=<?=$dato['id']?>" onclick="openInParentWindow(event)"><?=$dato['name']?></a></h6>
