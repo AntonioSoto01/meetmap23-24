@@ -187,11 +187,14 @@ try {
                                 $imagen_mostrar = 'images/otros.jpg';
                             }
                             ?>
-                            <img class="d-block w-100" src="<?= $imagen_mostrar ?>" alt="<?= $categoria['category'] ?>">
-                            <div class="carousel-caption d-md-block text-white text-center slider-item">
-                                <h5>
-                                    <?= $categoria['category'] ?>
-                                </h5>
+                            <div class="position-relative">
+                                <img class="d-block w-100" src="<?= $imagen_mostrar ?>" alt="<?= $categoria['category'] ?>">
+                                <div class="position-absolute custom-top start-50 translate-middle text-white text-center slider-item"
+                                    style="z-index: 1;">
+                                    <h5>
+                                        <?= $categoria['category'] ?>
+                                    </h5>
+                                </div>
                             </div>
                         </div>
                     <?php } ?>
@@ -250,7 +253,8 @@ try {
                     <?php } ?>
                     <div class="paginacion d-flex justify-content-center">
                         <?php if ($page > 1 && $page >= $num_pages - 2) { ?>
-                            <span><a href="?page=1"><<</a></span>
+                            <span><a href="?page=1">
+                                    <<< /a></span>
                             <?php for ($i = max(1, $num_pages - 2); $i <= $num_pages; $i++) { ?>
                                 <span><a <?= ($i == $page) ? "class='actual'" : "" ?> href="?page=<?= $i ?>">
                                         <?= $i ?>

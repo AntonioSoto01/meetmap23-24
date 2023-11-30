@@ -329,3 +329,6 @@ header {
     height: 70px;
     border-radius: 50%;
 }
+.custom-top{
+    top: 130px;
+}
