@@ -66,11 +66,9 @@ if ($db) {
     <?php
     require_once("header.php");
     ?>
-    <!--Contenido-->
     <div class="container-fluid flex-grow-1 position-relative d-flex flex-column">
     <div class="row">
     <?php
-        // Definir la URL de la imagen
         $imagen_fondo = './images/' . $plan['categoria'] . '.jpg';
         $imagen_mostrar = obtenerImagen($imagen_fondo);
     ?>
@@ -89,7 +87,6 @@ if ($db) {
     ?>
 </div>
 
-        <!--boton de corazon-->
         <form id="likeForm" method="post" action="like.php">
             <input type="hidden" name="activity_id" value="<?= $id ?>">
             <button type="submit" id="likeSubmit" class="btn btn-link">
@@ -101,8 +98,6 @@ if ($db) {
             </button>
         </form>
 
-
-        <!-- Sección de Descripción -->
         <div class="row mt-4">
             <div class="col-md-12">
                 <h2>Descripción</h2>
@@ -118,7 +113,6 @@ if ($db) {
             </div>
         </div>
 
-        <!-- Sección de iconos y textos -->
         <div class="row spacer">
             <div class="col-md-12">
                 <img src="images/marker.png" alt="Icono 1" class="icono">
@@ -147,7 +141,6 @@ if ($db) {
             </div>
         </div>
 
-        <!-- Sección de icono y texto adicionales -->
         <div class="row">
             <div class="col-md-12">
                 <img src="images/world.png" alt="Icono 4" class="icono world">
@@ -170,5 +163,4 @@ if ($db) {
 
 
 </body>
-
 </html>

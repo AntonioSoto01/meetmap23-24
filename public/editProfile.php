@@ -121,7 +121,6 @@ require_once("load_user.php");
         </div>
     </div>
     <?php require_once("footer.php"); ?>
-    <!-- Scripts -->
 
 </body>
 

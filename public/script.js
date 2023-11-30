@@ -11,25 +11,25 @@ function mostrarLogin() {
     document.getElementById('loginContent').style.display = 'block';
     document.getElementById('loginRegistroModalLabel').innerText = 'Iniciar sesión';
 }
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const params = new URLSearchParams(window.location.search);
     const errorLogin = params.get('errorLogin');
     const errorRegistro = params.get('errorRegistro');
     const successMsg = params.get('msg');
 
     if (successMsg === 'success') {
-            Swal.fire({
-                icon: 'success',
-                title: '¡Éxito!',
-                text: 'El registro se realizó correctamente.',
-            });
+        Swal.fire({
+            icon: 'success',
+            title: '¡Éxito!',
+            text: 'El registro se realizó correctamente.',
+        });
     }
     if (errorLogin === 'true') {
-        mostrarLogin(); // Mostrar el formulario de inicio de sesión si hay un error de inicio de sesión
-        $('#loginRegistroModal').modal('show'); 
+        mostrarLogin();
+        $('#loginRegistroModal').modal('show');
     } else if (errorRegistro === 'true') {
-        mostrarRegistro(); // Mostrar el formulario de registro si hay un error de registro
-        $('#loginRegistroModal').modal('show'); 
+        mostrarRegistro();
+        $('#loginRegistroModal').modal('show');
 
     }
 
@@ -37,8 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-$(document).ready(function() {
-    $('#toggleMenu').click(function() {
+$(document).ready(function () {
+    $('#toggleMenu').click(function () {
         $('#menuCollapse').toggleClass('collapsed');
         if ($('#menuCollapse').hasClass('collapsed')) {
             $('#menuCollapse').css('width', '15%');
@@ -56,13 +56,13 @@ $(document).ready(function() {
 
 function openInParentWindow(event) {
     event.preventDefault();
-    
+
     if (window.self !== window.top) {
-      window.top.location.href = event.target.href;
+        window.top.location.href = event.target.href;
     } else {
-      window.open(event.target.href, '_blank');
+        window.open(event.target.href, '_blank');
     }
-  }
+}
 
 function previewImage(event) {
     var input = event.target;

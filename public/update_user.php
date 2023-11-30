@@ -2,7 +2,6 @@
 require_once('common_functions.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // ... Código para validar los campos y otras validaciones ...
 
     $errors = validateFields([
         'username' => 'Username',
@@ -36,11 +35,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $destination)) {
                 $profileImageData = $destination;
             } else {
-                $_SESSION['errors']['errors']  = "Error al subir la imagen al servidor.";
+                $_SESSION['errors']['errors'] = "Error al subir la imagen al servidor.";
             }
         }
 
-        // Verificar si el email o username ya existen
         $existingUser = checkExistingUserEmail($username, $email);
         if ($existingUser['exists'] && $existingUser['data']['id'] !== $_SESSION['user_id']) {
             $_SESSION['errors']['errors'] = "El nombre de usuario o email ya están en uso.";
@@ -48,7 +46,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
 
-        // Actualizar los datos del usuario
         $query = "UPDATE Users SET username = :username, name = :firstName, last_name = :lastName, phone_number = :phone, email = :email, descr = :descr";
         $params = [
             ':username' => $username,

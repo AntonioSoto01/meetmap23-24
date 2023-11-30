@@ -1,5 +1,5 @@
 <?php
-require_once('config.php');
+require_once('common_functions.php');
 define('NUM_ELEM_POR_PAG', 5);
 
 if (isset($_GET['evento'])) {
@@ -56,7 +56,6 @@ try {
 
         $consulta->bindParam(':fecha', $fecha, PDO::PARAM_STR);
     } else {
-        // Cuando no se proporcionan datos en el formulario, se muestra la paginación normal
         $consulta = $db->prepare("
         SELECT id, name, description, date, time, place_name 
         FROM Activity 
@@ -74,10 +73,8 @@ try {
 
     $count_query = "SELECT COUNT(*) AS N FROM Activity ";
 
-    // Inicializar un array para almacenar los valores a vincular en la consulta
     $bind_values = [];
 
-    // Construir la parte WHERE de la consulta según los parámetros del formulario
     $where_clause = '';
     if ($evento != NULL && $fecha != NULL) {
         $where_clause = "WHERE (name LIKE :evento OR category LIKE :evento) AND date(date) = :fecha";
@@ -91,27 +88,21 @@ try {
         $bind_values[':fecha'] = $fecha;
     }
 
-    // Completar la consulta con la cláusula WHERE, si es necesario
     if (!empty($where_clause)) {
         $count_query .= $where_clause;
     }
 
-    // Preparar la consulta
     $consulta_count = $db->prepare($count_query);
 
-    // Vincular los valores si es necesario
     foreach ($bind_values as $key => $value) {
         $consulta_count->bindValue($key, $value, PDO::PARAM_STR);
     }
 
-    // Ejecutar la consulta
     $consulta_count->execute();
 
-    // Obtener el total de registros
     $count_result = $consulta_count->fetch();
     $count = $count_result['N'];
 
-    // Calcular el número de páginas
     $num_pages = ceil($count / NUM_ELEM_POR_PAG);
 
     $consultacat = $db->prepare("SELECT DISTINCT(category) FROM Activity");
@@ -144,19 +135,16 @@ try {
     require_once("header.php");
     ?>
 
-
-
-    <!-- Contenido de tu página -->
     <div class="container-fluid flex-grow-1 position-relative d-flex flex-column">
         <div class="row">
-            <div class="col-md-12 bg-primary py-5 text-center background-image" style="background-image: url('./images/tree.jpg')">
+            <div class="col-md-12 bg-primary py-5 text-center background-image"
+                style="background-image: url('./images/tree.jpg')">
                 <div class="container">
                     <h1 class="text-white">Planes Cercanos</h1>
                 </div>
             </div>
         </div>
 
-        <!-- Formulario superpuesto -->
         <div class="position-absolute-centered top-50 start-50 translate-middle-x">
             <div class="container">
                 <div class="row justify-content-center">
@@ -180,9 +168,7 @@ try {
             </div>
         </div>
 
-        <!-- Slider de Categorías -->
         <div class="row">
-            <!-- Carrusel de Bootstrap -->
             <div id="carouselExampleIndicators"
                 class="carousel slide col-md-12 text-white py-5 text-center slider-categorias" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -198,7 +184,7 @@ try {
                             if (file_exists($imagen)) {
                                 $imagen_mostrar = $imagen;
                             } else {
-                                $imagen_mostrar = 'images/otros.jpg'; // Si la imagen no existe, muestra otra imagen por defecto
+                                $imagen_mostrar = 'images/otros.jpg';
                             }
                             ?>
                             <img class="d-block w-100" src="<?= $imagen_mostrar ?>" alt="<?= $categoria['category'] ?>">
@@ -224,10 +210,8 @@ try {
         <div class="container-fluid px-0">
             <div class="row px-0">
                 <div class="col-12 text-dark px-0">
-                    <!-- Item Plan -->
                     <?php $counter = 0; ?>
                     <?php foreach ($datos as $dato) { ?>
-                        <!-- Clase de fondo alternada -->
                         <?php $bgClass = ($counter % 2 === 0) ? 'bg-plan-par' : 'bg-plan-impar'; ?>
                         <div class="p-0 <?= $bgClass ?>">
                             <div class="d-flex align-items-center">
@@ -242,11 +226,8 @@ try {
                                             <?= $dato['name'] ?>
                                         </a></h2>
                                     <?php
-                                    // Limitar la descripción a tres líneas
                                     $description = $dato['description'];
                                     $descriptionLines = explode("\n", wordwrap($description, 220, "\n"));
-
-                                    // Limitar la descripción a tres líneas y agregar puntos suspensivos si hay más de tres líneas
                                     $limitedDescription = implode("<br>", array_slice($descriptionLines, 0, 1));
                                     if (count($descriptionLines) > 1) {
                                         $limitedDescription .= '...';
@@ -269,8 +250,7 @@ try {
                     <?php } ?>
                     <div class="paginacion d-flex justify-content-center">
                         <?php if ($page > 1 && $page >= $num_pages - 2) { ?>
-                            <span><a href="?page=1">
-                                    <<< /a></span>
+                            <span><a href="?page=1"><<</a></span>
                             <?php for ($i = max(1, $num_pages - 2); $i <= $num_pages; $i++) { ?>
                                 <span><a <?= ($i == $page) ? "class='actual'" : "" ?> href="?page=<?= $i ?>">
                                         <?= $i ?>

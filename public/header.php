@@ -29,13 +29,13 @@ unset($_SESSION['errors']);
             <i class="fa fa-user"></i>
             <?php if ($usuarioAutenticado): ?>
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle text-white btn-custom-color" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-secondary dropdown-toggle text-white btn-custom-color" type="button"
+                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Perfil
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="editProfile.php">Editar Perfil</a>
-                        <a class="dropdown-item"  href="logout.php">Cerrar Sesión</a>
+                        <a class="dropdown-item" href="logout.php">Cerrar Sesión</a>
                     </div>
                 </div>
             <?php else: ?>

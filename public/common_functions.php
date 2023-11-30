@@ -1,8 +1,9 @@
 <?php
 session_start();
-require_once("config.php");
+require_once("../config/config.php");
 
-function connectDB() {
+function connectDB()
+{
     try {
         $db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -13,13 +14,18 @@ function connectDB() {
     }
 }
 
-function redirect($page,$param,$value) {
+function redirect($page, $param, $value)
+{
     $previousPage = $_SESSION['previous_page'] ?? 'index.php';
     header("Location: $previousPage?$param=$value");
     exit();
 }
-function previous_page(){     return  $_SESSION['previous_page'] ?? 'index.php';}
-function validateFields($campos) {
+function previous_page()
+{
+    return $_SESSION['previous_page'] ?? 'index.php';
+}
+function validateFields($campos)
+{
     $errors = [];
 
     foreach ($campos as $campo => $nombreCampo) {
@@ -30,8 +36,9 @@ function validateFields($campos) {
 
     return $errors;
 }
-function executeQuery($query, $params = []) {
-    $db = connectDB(); // Obtener la conexión a la base de datos
+function executeQuery($query, $params = [])
+{
+    $db = connectDB();
 
     if ($db) {
         try {
@@ -40,7 +47,7 @@ function executeQuery($query, $params = []) {
                 $stmt->bindParam($key, $value);
             }
             $stmt->execute();
-            return $stmt; // Devolver el objeto PDOStatement
+            return $stmt;
         } catch (PDOException $e) {
             $_SESSION['errors']['conexion'] = "Error de conexión: " . $e->getMessage();
             return false;
@@ -49,14 +56,15 @@ function executeQuery($query, $params = []) {
 
     return false;
 }
-function checkExistingUserEmail($username, $email) {
+function checkExistingUserEmail($username, $email)
+{
     $query_check_user = "SELECT * FROM Users WHERE username = :username OR email = :email LIMIT 1";
     $params = [':username' => $username, ':email' => $email];
     $stmt = executeQuery($query_check_user, $params);
 
     if ($stmt && $stmt->rowCount() > 0) {
         $existingUser = $stmt->fetch(PDO::FETCH_ASSOC);
-        return ['exists' => true, 'data' => $existingUser]; 
+        return ['exists' => true, 'data' => $existingUser];
     }
 
     return ['exists' => false, 'data' => null];

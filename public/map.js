@@ -7,13 +7,11 @@ L.control.zoom({ position: 'topright' }).addTo(map);
 
 L.control.locate({ position: 'bottomright' }).addTo(map);
 
-// Agregar la capa de mapa base
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-// Definir el icono para los marcadores
 var markerIcon = L.icon({
     iconUrl: './images/marker_custom.png',
     iconSize: [38, 76],
@@ -23,7 +21,6 @@ var markerIcon = L.icon({
 
 var markers = L.markerClusterGroup();
 
-// Obtener datos y crear marcadores
 fetch('api/evento.php')
     .then(response => response.json())
     .then(data => {
