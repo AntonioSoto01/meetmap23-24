@@ -4,7 +4,7 @@ USE meetmap;
 
 
 INSERT INTO Activity (latitude, longitude, name, description, date, time, category, place_name, link)
-VALUES (41.8781, -87.6298, '100 años de la Mesta (Fiesta de la Trashumancia)', '', '2023-10-01', '10:00', 'Exposiciones', 'Centro de Educación Ambiental de Casa de Campo', 'http://www.madrid.es/sites/v/index.jsp?vgnextchannel=ca9671ee4a9eb410VgnVCM100000171f5a0aRCRD&vgnextoid=e9b6122b8241b810VgnVCM1000001d4a900aRCRD');
+VALUES (40.41789950036311, -3.7309390858931137, '100 años de la Mesta (Fiesta de la Trashumancia)', '', '2023-10-01', '10:00', 'Exposiciones', 'Centro de Educación Ambiental de Casa de Campo', 'http://www.madrid.es/sites/v/index.jsp?vgnextchannel=ca9671ee4a9eb410VgnVCM100000171f5a0aRCRD&vgnextoid=e9b6122b8241b810VgnVCM1000001d4a900aRCRD');
 
 
 INSERT INTO Activity (latitude, longitude, name, description, date, time, category, place_name, link)
@@ -16,8 +16,8 @@ VALUES (40.414828532240946, -3.700164949543688, '14.4', '', '2024-06-27', '', 't
 INSERT INTO Activity (latitude, longitude, name, description, date, time, category, place_name, link)
 VALUES (40.44834125150792, -3.6761992414203526, '15º Jornada de DisCapacidad. Nuevos horizontes del deporte inclusivo', '', '2023-12-04', '12:00', 'actividades', 'Centro Cultural Nicolás Salmerón (Chamartín)', 'http://www.madrid.es/sites/v/index.jsp?vgnextchannel=ca9671ee4a9eb410VgnVCM100000171f5a0aRCRD&vgnextoid=80a5b7ee2fbfb810VgnVCM2000001f4a900aRCRD');
 
-INSERT INTO Activity (latitude, longitude, name, description, date, time, category, link)
-VALUES (0, 0, '25N. Día Internacional de la Eliminación de la Violencia contra la Mujer en Usera', '', '2023-11-01', '', 'actividades', 'http://www.madrid.es/sites/v/index.jsp?vgnextchannel=ca9671ee4a9eb410VgnVCM100000171f5a0aRCRD&vgnextoid=d3837900addcb810VgnVCM2000001f4a900aRCRD');
+INSERT INTO Activity (latitude, longitude, name, description, date, time, category, place_name, link)
+VALUES (40.44864332758775, -3.704513191828797, 'Cine Forum: Jornada Día Internacional de las Personas Migrantes', 'Oficina Municipal de Inmigración. Asociación La Rueca. El objetivo principal es realizar una serie de actividades que pongan en valor la riqueza personal y cultural que tienen las Oficinas Municipales de Información, Orientación y Acompañamiento para la Integración Social de la Población Migrante. Mediante presentaciones elaboradas por los y las participantes, para culminar con la proyección de cortometrajes realizados en sus clases de formación, y distintas actividades que dan a conocer los países de origen y fomentar el encuentro y conocimiento de sus distintas realidades. Duración: 3 h. Edad recomendada: Todos los públicos. Inscripciones en la web de la Asociación', '2023-12-13', '10:00', 'CineActividadesAudiovisuales', 'Centro Sociocultural José de Espronceda (Tetuán)', 'http://www.madrid.es/sites/v/index.jsp?vgnextchannel=ca9671ee4a9eb410VgnVCM100000171f5a0aRCRD&vgnextoid=2603653e34ddb810VgnVCM1000001d4a900aRCRD');
 
 INSERT INTO Activity (latitude, longitude, name, description, date, time, category, place_name, link)
 VALUES (40.47860087334554, -3.7094408342979954, '54 voces contra la guerra', '', '2023-12-12', '18:30', 'literatura', 'Biblioteca Pública Municipal José Saramago (Fuencarral-El Pardo)', 'http://www.madrid.es/sites/v/index.jsp?vgnextchannel=ca9671ee4a9eb410VgnVCM100000171f5a0aRCRD&vgnextoid=d5406af73609b810VgnVCM1000001d4a900aRCRD');
