@@ -69,7 +69,7 @@ if ($db) {
     <div class="container-fluid flex-grow-1 position-relative d-flex flex-column">
     <div class="row">
     <?php
-        $imagen_fondo = './images/' . $plan['categoria'] . '.jpg';
+        $imagen_fondo = './images/' . $plan['category'] . '.jpg';
         $imagen_mostrar = obtenerImagen($imagen_fondo);
     ?>
         <div class="col-md-12 bg-primary py-5 text-center background-image" style="background-image: url('<?= $imagen_mostrar ?>')">

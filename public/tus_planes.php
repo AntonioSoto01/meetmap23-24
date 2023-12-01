@@ -5,7 +5,7 @@ try {
 
 
     $query = "
-        SELECT DISTINCT a.id, a.name, a.description, a.date, a.time, a.place_name
+        SELECT DISTINCT a.id, a.name, a.description, a.date, a.time, a.place_name, a.category
         FROM Activity a
         LEFT JOIN Likes l ON a.id = l.activity_id
         LEFT JOIN Subscribers s ON a.id = s.activity_id
@@ -44,7 +44,7 @@ try {
                 <div class="p-0 <?= $bgClass ?> w-100">
                     <div class="d-flex align-items-center">
                         <?php
-                        $ruta_imagen = './images/' . $dato['categoria'] . '.jpg';
+                        $ruta_imagen = './images/' . $dato['category'] . '.jpg';
                         $imagen_mostrar = (file_exists($ruta_imagen)) ? $ruta_imagen : './images/otros.jpg';
                         ?>
                         <img class="img-iframe" src="<?= $imagen_mostrar ?>" alt="Plan">

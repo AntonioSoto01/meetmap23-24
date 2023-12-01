@@ -16,13 +16,18 @@ if (isset($_GET['page']) && is_numeric($_GET['page'])) {
     $page = 1;
 }
 
+$currentParams = $_GET;
+unset($currentParams['page']);
+
+$queryString = http_build_query($currentParams);
+
 try {
 
     $db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
 
     if ($evento != NULL && $fecha != NULL) {
         $consulta = $db->prepare("
-        SELECT id, name, description, date, time, place_name 
+        SELECT id, name, description, date, time, place_name, category 
         FROM Activity 
         WHERE (name LIKE :evento OR category LIKE :evento) 
         AND date(date) = :fecha
@@ -35,7 +40,7 @@ try {
         $consulta->bindParam(':fecha', $fecha, PDO::PARAM_STR);
     } else if ($evento != NULL && $fecha == NULL) {
         $consulta = $db->prepare("
-        SELECT id, name, description, date, time, place_name 
+        SELECT id, name, description, date, time, place_name, category 
         FROM Activity 
         WHERE name LIKE :evento OR category LIKE :evento
         ORDER BY name 
@@ -46,7 +51,7 @@ try {
         $consulta->bindValue(':evento', "%$evento%", PDO::PARAM_STR);
     } else if ($evento == NULL && $fecha != NULL) {
         $consulta = $db->prepare("
-        SELECT id, name, description, date, time, place_name 
+        SELECT id, name, description, date, time, place_name, category 
         FROM Activity 
         WHERE date = :fecha
         ORDER BY name 
@@ -57,7 +62,7 @@ try {
         $consulta->bindParam(':fecha', $fecha, PDO::PARAM_STR);
     } else {
         $consulta = $db->prepare("
-        SELECT id, name, description, date, time, place_name 
+        SELECT id, name, description, date, time, place_name, category 
         FROM Activity 
         ORDER BY name 
         LIMIT :limite 
@@ -219,8 +224,8 @@ try {
                         <div class="p-0 <?= $bgClass ?>">
                             <div class="d-flex align-items-center">
                                 <?php
-                                $ruta_imagen = './images/' . $dato['categoria'] . '.jpg';
-                                $imagen_mostrar = (file_exists($ruta_imagen)) ? $ruta_imagen : './images/otros.jpg';
+                                $ruta_imagen = 'images/' . $dato['category'] . '.jpg';
+                                $imagen_mostrar = (file_exists($ruta_imagen)) ? $ruta_imagen : 'images/otros.jpg';
                                 ?>
                                 <img class="img-plan" src="<?= $imagen_mostrar ?>" alt="Plan">
                                 <div class="ml-3" style="padding-left: 0; padding-right: 0;">
@@ -253,47 +258,43 @@ try {
                     <?php } ?>
                     <div class="paginacion d-flex justify-content-center">
                         <?php if ($page > 1 && $page >= $num_pages - 2) { ?>
-                            <span><a href="?page=1">
+                            <span><a href="?<?= $queryString ?>&page=1">
                                     <<< /a></span>
                             <?php for ($i = max(1, $num_pages - 2); $i <= $num_pages; $i++) { ?>
-                                <span><a <?= ($i == $page) ? "class='actual'" : "" ?> href="?page=<?= $i ?>">
+                                <span><a <?= ($i == $page) ? "class='actual'" : "" ?> href="?<?= $queryString ?>&page=<?= $i ?>">
                                         <?= $i ?>
                                     </a></span>
                             <?php } ?>
                             <?php if ($page < $num_pages) { ?>
-                                <span><a href="?page=<?= $num_pages ?>">>></a></span>
+                                <span><a href="?<?= $queryString ?>&page=<?= $num_pages ?>">>></a></span>
                             <?php } ?>
                         <?php } else if ($page <= 2) { ?>
                             <?php for ($i = 1; $i <= min(3, $num_pages); $i++) { ?>
-                                    <span><a <?= ($i == $page) ? "class='actual'" : "" ?> href="?page=<?= $i ?>">
+                                    <span><a <?= ($i == $page) ? "class='actual'" : "" ?> href="?<?= $queryString ?>&page=<?= $i ?>">
                                         <?= $i ?>
                                         </a></span>
                             <?php } ?>
                             <?php if ($page < $num_pages) { ?>
-                                    <span><a href="?page=<?= $num_pages ?>">>></a></span>
+                                    <span><a href="?<?= $queryString ?>&page=<?= $num_pages ?>">>></a></span>
                             <?php } ?>
                         <?php } else { ?>
                             <?php for ($i = max(1, $page - 1); $i <= min($page + 1, $num_pages); $i++) { ?>
-                                    <span><a <?= ($i == $page) ? "class='actual'" : "" ?> href="?page=<?= $i ?>">
+                                    <span><a <?= ($i == $page) ? "class='actual'" : "" ?> href="?<?= $queryString ?>&page=<?= $i ?>">
                                         <?= $i ?>
                                         </a></span>
                             <?php } ?>
                             <?php if ($page < $num_pages) { ?>
-                                    <span><a href="?page=<?= $num_pages ?>">>></a></span>
+                                    <span><a href="?<?= $queryString ?>&page=<?= $num_pages ?>">>></a></span>
                             <?php } ?>
                         <?php } ?>
                     </div>
                 </div>
             </div>
         </div>
-
-
     </div>
     <?php
     require_once("footer.php");
     ?>
-
-
     <?php include_once("links.php"); ?>
 </body>
 
