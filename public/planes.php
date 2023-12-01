@@ -258,15 +258,14 @@ try {
                     <?php } ?>
                     <div class="paginacion d-flex justify-content-center">
                         <?php if ($page > 1 && $page >= $num_pages - 2) { ?>
-                            <span><a href="?<?= $queryString ?>&page=1">
-                                    <<< /a></span>
+                            <span><a href="?<?= $queryString ?>&page=1">&lt;&lt;</a></span>
                             <?php for ($i = max(1, $num_pages - 2); $i <= $num_pages; $i++) { ?>
                                 <span><a <?= ($i == $page) ? "class='actual'" : "" ?> href="?<?= $queryString ?>&page=<?= $i ?>">
                                         <?= $i ?>
                                     </a></span>
                             <?php } ?>
                             <?php if ($page < $num_pages) { ?>
-                                <span><a href="?<?= $queryString ?>&page=<?= $num_pages ?>">>></a></span>
+                                <span><a href="?<?= $queryString ?>&page=<?= $num_pages ?>">&gt;&gt;</a></span>
                             <?php } ?>
                         <?php } else if ($page <= 2) { ?>
                             <?php for ($i = 1; $i <= min(3, $num_pages); $i++) { ?>
@@ -275,7 +274,7 @@ try {
                                         </a></span>
                             <?php } ?>
                             <?php if ($page < $num_pages) { ?>
-                                    <span><a href="?<?= $queryString ?>&page=<?= $num_pages ?>">>></a></span>
+                                    <span><a href="?<?= $queryString ?>&page=<?= $num_pages ?>">&gt;&gt;</a></span>
                             <?php } ?>
                         <?php } else { ?>
                             <?php for ($i = max(1, $page - 1); $i <= min($page + 1, $num_pages); $i++) { ?>
@@ -284,10 +283,11 @@ try {
                                         </a></span>
                             <?php } ?>
                             <?php if ($page < $num_pages) { ?>
-                                    <span><a href="?<?= $queryString ?>&page=<?= $num_pages ?>">>></a></span>
+                                    <span><a href="?<?= $queryString ?>&page=<?= $num_pages ?>">&gt;&gt;</a></span>
                             <?php } ?>
                         <?php } ?>
                     </div>
+
                 </div>
             </div>
         </div>
