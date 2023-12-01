@@ -21,11 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
 
-        if (strlen($username) < 4) {
-            $_SESSION['errors']['username'] = 'El nombre de usuario debe tener al menos 4 caracteres.';
-            redirect('editProfile.php', 'msg', 'error');
-            exit();
-        }
         $profileImageData = null;
         if (!empty($_FILES['profileImage']['tmp_name']) && is_uploaded_file($_FILES['profileImage']['tmp_name'])) {
             $uploadDirectory = 'uploads/images';

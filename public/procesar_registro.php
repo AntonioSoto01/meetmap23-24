@@ -20,8 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['formType'] === 'register') {
         if ($password !== $confirmPassword) {
             $errors['confirmPasswordRegistro'] = "Las contraseñas no coinciden. Por favor, inténtelo de nuevo.";
         }
-        if (strlen($password) < 8) {
-            $errors['passwordRegistro'] = 'La contraseña debe tener al menos 8 caracteres.';
+        if (strlen($password) < 5) {
+            $errors['passwordRegistro'] = 'La contraseña debe tener al menos 5 caracteres.';
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -39,11 +39,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['formType'] === 'register') {
             $stmt_insert_user = executeQuery($query_insert_user, $params_insert_user);
 
             if ($stmt_insert_user) {
-                $result = executeQuery('SELECT LAST_INSERT_ID() as id');
-                if ($result) {
-
-                    $user_id = $result->fetch(PDO::FETCH_ASSOC)['id'];
-                    $_SESSION['user_id'] = $user_id;
+                $query = "SELECT * FROM Users WHERE username = :username";
+                $params = [':username' => $username];
+                $stmt = executeQuery($query, $params);
+        
+                if ($stmt) {
+                    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $_SESSION['user_id'] = $user['id'];
                     $previousPage = $_SESSION['previous_page'] ?? 'index.php';
                     header("Location: $previousPage?msg=success");
                     exit();
