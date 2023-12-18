@@ -14,12 +14,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
     if ($userExists) {
 
+        $token = bin2hex(random_bytes(16));
 
-$asunto = 'Recuperación de contraseña';
-$cuerpo = 'Hola, has solicitado recuperar tu contraseña. ¡Haz clic en el enlace para cambiar tu contraseña!';
-$envioExitoso = enviarCorreo($email, $asunto, $cuerpo);
+
+        storeTokenInDatabase($email, $token);
+
+   
+        $asunto = 'Recuperación de contraseña';
+        $cuerpo = 'Hola, has solicitado recuperar tu contraseña. Haz clic en el siguiente enlace para cambiar tu contraseña: <a href="link_para_resetear_contraseña.php?token=' . $token . '">Restablecer contraseña</a>';
+        
+        $envioExitoso = enviarCorreo($email, $asunto, $cuerpo);
 if ($envioExitoso) {
-    redirect(previous_page(), 'success', 'true');
+    header("Location: confirmacion_recuperacion_contraseña.php");
     exit();
 }else{echo("edfea");
 
@@ -44,5 +50,16 @@ function checkExistingUserEmailForPasswordRecovery($email) {
     }
     return false;
 }
+function storeTokenInDatabase($email, $token) {
+    // Establece la conexión a tu base de datos
+    // ...
 
+    // Prepara y ejecuta la consulta para actualizar el token del usuario
+    $query = "UPDATE Users SET token = :token WHERE email = :email";
+    $params = [':token' => $token, ':email' => $email];
+    executeQuery($query, $params);
+
+    // Cierra la conexión a la base de datos
+    // ...
+}
 ?>

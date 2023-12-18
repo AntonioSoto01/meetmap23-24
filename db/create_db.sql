@@ -14,7 +14,8 @@ CREATE TABLE Users (
     email VARCHAR(255),
     phone_number VARCHAR(15),
     descr TEXT,
-    profile_image TEXT
+    profile_image TEXT,
+	token VARCHAR(255) DEFAULT NULL
 );
 
 CREATE TABLE Activity (
