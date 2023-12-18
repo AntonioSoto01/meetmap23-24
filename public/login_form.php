@@ -24,6 +24,6 @@
             <span class="error"><?=$errors['login']?></span>
         <?php } ?>
     </div>
-
+    <p class="mt-3 text-center"><a href="introducirEmail.php" class="text-primary">He olvidado la contraseña </a></p>
     <p class="mt-3 text-center">¿No tienes una cuenta? <a href="#" class="text-primary" onclick="mostrarRegistro()">Regístrate aquí</a></p>
 </form>
