@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
    
         $asunto = 'Recuperación de contraseña';
-        $url = "http://localhost:63342/meetmap23-24/public/changePassword.php?token=" . $token;
+        $url = "http://localhost:3000/public/changePassword.php?token=" . $token;
         $cuerpo = 'Hola, has solicitado recuperar tu contraseña. Haz clic en el siguiente enlace para cambiar tu contraseña: <a href="' . $url . '">Restablecer contraseña</a>';
 
         

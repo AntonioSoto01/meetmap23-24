@@ -1,4 +1,11 @@
 <?php
+// procesar_login.php
+
+// Iniciar la sesión si no está iniciada
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once('common_functions.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['formType'] === 'login') {
@@ -21,6 +28,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['formType'] === 'login') {
             if ($user && password_verify($password, $user['pw'])) {
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['user_id'] = $user['id'];
+
+                if (isset($_POST['remember'])) {
+                    $cookie_name = "remember_user";
+                    $cookie_value = $user['username'];
+                    $cookie_expire = time() + 60 * 60 * 24 * 7; 
+                    setcookie($cookie_name, $cookie_value, $cookie_expire, "/");
+                }
+
                 $previousPage = $_SESSION['previous_page'] ?? 'index.php';
                 header("Location: $previousPage?msg=success");
                 exit();
