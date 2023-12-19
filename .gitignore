@@ -2,3 +2,4 @@
 config.php
 public/uploads/
 vendor/*
+.idea/*

@@ -7,7 +7,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $_SESSION['errors']['emailRegistro'] = 'El correo electrónico no tiene un formato válido.';
-        redirect('formulario_recuperar_contraseña.php', 'errorRecuperacion', 'true');
     }
 
     $userExists = checkExistingUserEmailForPasswordRecovery($email);
@@ -21,11 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
    
         $asunto = 'Recuperación de contraseña';
-        $cuerpo = 'Hola, has solicitado recuperar tu contraseña. Haz clic en el siguiente enlace para cambiar tu contraseña: <a href="link_para_resetear_contraseña.php?token=' . $token . '">Restablecer contraseña</a>';
+        $url = "http://localhost:63342/meetmap23-24/public/changePassword.php?token=" . $token;
+        $cuerpo = 'Hola, has solicitado recuperar tu contraseña. Haz clic en el siguiente enlace para cambiar tu contraseña: <a href="' . $url . '">Restablecer contraseña</a>';
+
         
         $envioExitoso = enviarCorreo($email, $asunto, $cuerpo);
 if ($envioExitoso) {
-    header("Location: confirmacion_recuperacion_contraseña.php");
+    redirect(previous_page(), 'success', 'true');
     exit();
 }else{echo("edfea");
 
