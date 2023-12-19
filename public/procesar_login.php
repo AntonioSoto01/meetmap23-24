@@ -29,13 +29,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['formType'] === 'login') {
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['user_id'] = $user['id'];
 
+                // Generar un token único utilizando OpenSSL
+                $generatedToken = bin2hex(openssl_random_pseudo_bytes(32)); // Generar un token hexadecimal único de 32 bytes
+
+                // Guardar el token en la base de datos
+                $expiration = date('Y-m-d H:i:s', strtotime('+1 week')); // Una semana de expiración
+                $tokenType = 'remember'; // Tipo de token
+
+                // Insertar el token en la tabla 'Token'
+                $queryToken = "INSERT INTO Token (user_id, token_value, expiration_date, token_type) VALUES (:user_id, :token_value, :expiration_date, :token_type)";
+                $paramsToken = [
+                    ':user_id' => $user['id'],
+                    ':token_value' => $generatedToken,
+                    ':expiration_date' => $expiration,
+                    ':token_type' => $tokenType
+                ];
+                executeQuery($queryToken, $paramsToken);
+
                 if (isset($_POST['remember'])) {
-                    $cookie_name = "remember_user";
-                    $cookie_value = $user['id'];
-                    $cookie_expire = time() + 60 * 60 * 24 * 7; 
+                    $cookie_name = "remember";
+                    $cookie_value = $generatedToken;
+                    $cookie_expire = time() + 60 * 60 * 24 * 7;
                     setcookie($cookie_name, $cookie_value, $cookie_expire, "/");
                 }
-
                 $previousPage = $_SESSION['previous_page'] ?? 'index.php';
                 header("Location: $previousPage?msg=success");
                 exit();

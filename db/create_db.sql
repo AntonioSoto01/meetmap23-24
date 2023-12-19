@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS Likes;
 DROP TABLE IF EXISTS Subscribers;
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Activity;
+DROP TABLE IF EXISTS Token;
 CREATE TABLE Users (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255),
@@ -14,8 +15,7 @@ CREATE TABLE Users (
     email VARCHAR(255),
     phone_number VARCHAR(15),
     descr TEXT,
-    profile_image TEXT,
-	token VARCHAR(255) DEFAULT NULL
+    profile_image TEXT
 );
 
 CREATE TABLE Activity (
@@ -57,3 +57,12 @@ CREATE TABLE Likes(
     FOREIGN KEY (activity_id) REFERENCES Activity(id)
 );
 
+
+CREATE TABLE Token (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    token_value VARCHAR(255),
+    expiration_date DATETIME,
+    token_type VARCHAR(255),
+    FOREIGN KEY (user_id) REFERENCES Users(id)
+);

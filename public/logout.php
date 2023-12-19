@@ -1,9 +1,9 @@
 <?php
 session_start();
 session_unset(); 
-if (isset($_COOKIE['remember_user'])) {
-    unset($_COOKIE['remember_user']);
-    setcookie('remember_user', '', time() - 3600, '/'); // Establecer el tiempo de expiración en el pasado
+if (isset($_COOKIE['remember'])) {
+    unset($_COOKIE['remember']);
+    setcookie('remember', '', time() - 3600, '/'); // Establecer el tiempo de expiración en el pasado
 }
 session_destroy(); 
 

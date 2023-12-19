@@ -1,8 +1,6 @@
 <?php
 // Define $token inicialmente para evitar errores si no está definida
 $token = isset($_GET['token']) ? $_GET['token'] : '';
-
-echo($token)
 ?>
 <!DOCTYPE html>
 <html>

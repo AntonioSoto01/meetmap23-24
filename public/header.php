@@ -6,14 +6,26 @@ $_SESSION['previous_page'] = $parseUrl;
 
 $errors = $_SESSION['errors'];
 
-
-if (!$usuarioAutenticado && isset($_COOKIE['remember_user'])) {
-    $_SESSION['user_id'] = $_COOKIE['remember_user'];
-}
 $usuarioAutenticado = isset($_SESSION['user_id']);
-unset($_SESSION['errors']);
 
+if (!$usuarioAutenticado && isset($_COOKIE['remember'])) {
+
+    $query = "SELECT user_id FROM Token WHERE token_value = :token_value";
+    $params = [':token_value' => $_COOKIE['remember']];
+    $result = executeQuery($query, $params);
+
+    if ($result) {
+        $tokenData = $result->fetch(PDO::FETCH_ASSOC);
+        if ($tokenData) {
+            $_SESSION['user_id'] = $tokenData['user_id'];
+            $usuarioAutenticado = true;
+        }
+    }
+}
+
+unset($_SESSION['errors']);
 ?>
+
 <header class="bg-custom-color text-white">
     <div class="d-flex justify-content-between align-items-center py-3">
         <div class="logo ml-5">

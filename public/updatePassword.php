@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['token'])) {
         $token = $_POST['token'];
     } else {
-        // Si no se proporciona el token en la URL, redirigir con un mensaje de error
+        // Si no se proporciona el token en el formulario, redirigir con un mensaje de error
         $_SESSION['errors'] = "Token no proporcionado.";
         header("Location: changePassword.php");
         exit();
@@ -36,17 +36,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (empty($errors)) {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $query_update_password = "UPDATE Users SET pw = :pw WHERE token = :token";
+            $query_update_password = "UPDATE Users 
+                                      INNER JOIN Token ON Users.id = Token.user_id
+                                      SET Users.pw = :pw 
+                                      WHERE Token.token_value = :token 
+                                      AND Token.token_type = 'password_recovery' 
+                                      AND Token.expiration_date > NOW()";
             $params_update_password = [':pw' => $hashedPassword, ':token' => $token];
             $stmt_update_password = executeQuery($query_update_password, $params_update_password);
 
             if ($stmt_update_password) {
-                $query_delete_token = "UPDATE Users SET token = NULL WHERE token = :token";
+                // Eliminar el token después de actualizar la contraseña
+                $query_delete_token = "DELETE FROM Token 
+                                       WHERE token_value = :token 
+                                       AND token_type = 'password_recovery'";
                 $params_delete_token = [':token' => $token];
                 $stmt_delete_token = executeQuery($query_delete_token, $params_delete_token);
 
-                // Redirigir a una página de éxito o a donde corresponda
-                header("Location: passwordUpdated.php");
+
+                header("Location: index.php");
                 exit();
             } else {
                 $errors['errors'] = "Error al actualizar la contraseña.";
@@ -55,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Si hay errores, almacenarlos en sesión y redirigir de vuelta al formulario con el token
+
 $_SESSION['errors'] = $errors;
 header("Location: changePassword.php?token=$token");
 exit();
