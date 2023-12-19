@@ -6,6 +6,10 @@ $_SESSION['previous_page'] = $parseUrl;
 
 $errors = $_SESSION['errors'];
 
+
+if (!$usuarioAutenticado && isset($_COOKIE['remember_user'])) {
+    $_SESSION['user_id'] = $_COOKIE['remember_user'];
+}
 $usuarioAutenticado = isset($_SESSION['user_id']);
 unset($_SESSION['errors']);
 

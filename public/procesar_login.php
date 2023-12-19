@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['formType'] === 'login') {
 
                 if (isset($_POST['remember'])) {
                     $cookie_name = "remember_user";
-                    $cookie_value = $user['username'];
+                    $cookie_value = $user['id'];
                     $cookie_expire = time() + 60 * 60 * 24 * 7; 
                     setcookie($cookie_name, $cookie_value, $cookie_expire, "/");
                 }
