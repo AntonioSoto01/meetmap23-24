@@ -22,12 +22,16 @@
         <input type="checkbox" id="remember" name="remember">
         <label for="remember">Recuérdame</label>
     </div>
-
+    <div class="text-center">
+        <a href="oauthGoogle.php" class="btn btn-danger btn-md text-white">Iniciar sesión con Google</a>
+        <a href="oauthGithub.php" class="btn btn-danger btn-md text-white">Iniciar sesión con Github</a>
+    </div>
     <div class="text-center">
         <button type="submit" class="btn btn-custom-color btn-md text-white">Iniciar sesión</button>
         <?php if(isset($errors['login'])) { ?>
             <span class="error"><?=$errors['login']?></span>
         <?php } ?>
+
     </div>
     <p class="mt-3 text-center"><a href="introducirEmail.php" class="text-primary">He olvidado la contraseña</a></p>
     <p class="mt-3 text-center">¿No tienes una cuenta? <a href="#" class="text-primary" onclick="mostrarRegistro()">Regístrate aquí</a></p>

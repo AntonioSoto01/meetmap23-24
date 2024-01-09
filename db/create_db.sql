@@ -3,9 +3,9 @@ USE meetmap;
 DROP TABLE IF EXISTS Message;
 DROP TABLE IF EXISTS Likes;
 DROP TABLE IF EXISTS Subscribers;
-DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Activity;
 DROP TABLE IF EXISTS Token;
+DROP TABLE IF EXISTS Users;
 CREATE TABLE Users (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255),
@@ -15,7 +15,8 @@ CREATE TABLE Users (
     email VARCHAR(255),
     phone_number VARCHAR(15),
     descr TEXT,
-    profile_image TEXT
+    profile_image TEXT,
+    oauth_provider TEXT
 );
 
 CREATE TABLE Activity (

@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['formType'] === 'login') {
     ]);
 
     if (empty($errors)) {
-        $query = "SELECT * FROM Users WHERE username = :username";
+        $query = "SELECT * FROM Users WHERE username = :username AND (oauth_provider IS NULL)";
         $params = [':username' => $username];
         $stmt = executeQuery($query, $params);
 
@@ -26,11 +26,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST['formType'] === 'login') {
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($user && password_verify($password, $user['pw'])) {
-                $_SESSION['username'] = $user['username'];
                 $_SESSION['user_id'] = $user['id'];
 
                 // Generar un token único utilizando OpenSSL
-                $generatedToken = bin2hex(openssl_random_pseudo_bytes(32)); // Generar un token hexadecimal único de 32 bytes
+                $generatedToken = bin2hex(openssl_random_pseudo_bytes(32));
 
                 // Guardar el token en la base de datos
                 $expiration = date('Y-m-d H:i:s', strtotime('+1 week')); // Una semana de expiración

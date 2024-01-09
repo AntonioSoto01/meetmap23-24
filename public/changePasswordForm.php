@@ -1,6 +1,8 @@
 <?php
-// Define $token inicialmente para evitar errores si no está definida
+
 $token = isset($_GET['token']) ? $_GET['token'] : '';
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,6 +18,9 @@ $token = isset($_GET['token']) ? $_GET['token'] : '';
 </head>
 
 <body>
+<?php
+require_once("header.php");
+?>
     <form method="post" action="updatePassword.php">
         <input type="hidden" name="token" value="<?php echo $token; ?>">
         <div class="form-group">
