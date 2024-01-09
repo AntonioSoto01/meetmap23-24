@@ -88,13 +88,5 @@ if (!empty($_GET['error'])) {
         exit('Something went wrong: ' . $e->getMessage());
     }
 
-    // Use this to interact with an API on the user's behalf
-    echo $token->getToken();
-
-    // Use this to get a new access token if the old one expires
-    echo $token->getRefreshToken();
-
-    // Unix timestamp at which the access token expires
-    echo $token->getExpires();
 }
 ?>
