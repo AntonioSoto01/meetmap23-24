@@ -43,7 +43,8 @@ if (!isset($_GET['code'])) {
         $ownerDetails = $provider->getResourceOwner($token);
 
         // Use these details to create a new profile or update an existing one
-        $firstName = $ownerDetails->getNickname();
+        $username = $ownerDetails->getNickname();
+        $firstName = $ownerDetails->getName();
         //$email = $ownerDetails->getEmail();
         $email = getUserPrimaryEmail($provider, $token);
         $userDetails = $ownerDetails->toArray();
@@ -57,25 +58,40 @@ if (!isset($_GET['code'])) {
         if ($stmt) {
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($user) {
-                $_SESSION['user_id'] = $user['id'];
-                // $query_update_user = "UPDATE Users SET name = :name, email = :email, oauth_provider = 'github', profile_image = :profile_image WHERE id = :id";
-                //$params_update_user = [':name' => $firstName, ':email' => $email, ':profile_image' => $profileImage, ':id' => $user['id']];
-                //$stmt_update_user = executeQuery($query_update_user, $params_update_user);
-                //if ($stmt) {
-                //$user = $stmt->fetch(PDO::FETCH_ASSOC);
-                $previousPage = $_SESSION['previous_page'] ?? 'index.php';
-                header("Location: $previousPage?msg=success");
-                exit();
+                if ($user['oauth_provider'] != null && $user['oauth_provider'] != 'google') {
+                    echo "<script>alert('Please login with your registered provider.')</script>";
+                    $previousPage = $_SESSION['previous_page'] ?? 'index.php';
+                    header("Location: $previousPage?msg=fail");
+                    exit();
 
-                // }
+                } else {
+                    $_SESSION['user_id'] = $user['id'];
+                    if ($user['oauth_provider'] !='github') {
 
+                        $query_update_user = "UPDATE Users SET name = :name, oauth_provider = 'github', profile_image = :profile_image, pw = NULL WHERE id = :id";
+                        $params_update_user = [':name' => $firstName,  ':profile_image' => $profileImage, ':id' => $user['id']];
+                        $stmt_update_user = executeQuery($query_update_user, $params_update_user);
+
+                        if ($stmt_update_user) {
+                            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                            $previousPage = $_SESSION['previous_page'] ?? 'index.php';
+                            header("Location: $previousPage");
+                            exit();
+
+                        }else{print_r($stmt_update_user);}
+
+                    }else{
+                    $previousPage = $_SESSION['previous_page'] ?? 'index.php';
+                    header("Location: $previousPage?msg=success");
+                    exit();
+                }}
             } else {
-                $query_insert_user = "INSERT INTO Users (name, email, oauth_provider, profile_image) VALUES (:name, :email, 'github', :profile_image)";
-                $params_insert_user = [':name' => $firstName, ':email' => $email, ':profile_image' => $profileImage];
+                $query_insert_user = "INSERT INTO Users (username, email, oauth_provider, profile_image) VALUES (:username, :email, 'github', :profile_image)";
+                $params_insert_user = [':username' => $username, ':email' => $email, ':profile_image' => $profileImage];
                 $stmt_insert_user = executeQuery($query_insert_user, $params_insert_user);
                 if ($stmt_insert_user) {
                     $query = "SELECT * FROM Users WHERE username = :username";
-                    $params = [':username' => $firstName];
+                    $params = [':username' => $username];
                     $stmt = executeQuery($query, $params);
 
                     if ($stmt) {
@@ -99,30 +115,30 @@ if (!isset($_GET['code'])) {
 }
 function getUserPrimaryEmail($provider, $accessToken)
 {
-        $url = 'https://api.github.com/user/emails';
-        try {
-            $request = $provider->getAuthenticatedRequest(
-                'GET',
-                $url,
-                $accessToken
-            );
+    $url = 'https://api.github.com/user/emails';
+    try {
+        $request = $provider->getAuthenticatedRequest(
+            'GET',
+            $url,
+            $accessToken
+        );
 
-            $response = $provider->getResponse($request);
-            $emails = json_decode($response->getBody(), true);
+        $response = $provider->getResponse($request);
+        $emails = json_decode($response->getBody(), true);
 
-            // Find the primary email
-            foreach ($emails as $email) {
-                if ($email['primary'] === true) {
-                    return $email['email'];
-                }
+        // Find the primary email
+        foreach ($emails as $email) {
+            if ($email['primary'] === true) {
+                return $email['email'];
             }
-
-            // Return null if no primary email found
-            return null;
-        } catch (\Exception $e) {
-            // Handle exception or error in fetching user emails
-            return null;
         }
-    
+
+        // Return null if no primary email found
+        return null;
+    } catch (\Exception $e) {
+        // Handle exception or error in fetching user emails
+        return null;
+    }
+
 }
 ?>
