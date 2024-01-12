@@ -58,7 +58,7 @@ if (!isset($_GET['code'])) {
         if ($stmt) {
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($user) {
-                if ($user['oauth_provider'] != null && $user['oauth_provider'] != 'google') {
+                if ($user['oauth_provider'] != null && $user['oauth_provider'] != 'github') {
                     echo "<script>alert('Please login with your registered provider.')</script>";
                     $previousPage = $_SESSION['previous_page'] ?? 'index.php';
                     header("Location: $previousPage?msg=fail");

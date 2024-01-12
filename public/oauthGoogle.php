@@ -76,7 +76,7 @@ if (!empty($_GET['error'])) {
 
                     }else{
                     $previousPage = $_SESSION['previous_page'] ?? 'index.php';
-                    header("Location: $previousPage?msg=slluccess");
+                    header("Location: $previousPage?msg=success");
                     exit();
                 }}
             } else {
